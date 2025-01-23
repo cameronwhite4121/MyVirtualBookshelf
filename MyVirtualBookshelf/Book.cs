@@ -35,5 +35,19 @@ namespace MyVirtualBookshelf
         /// </summary>
         public string Isbn { get; set; }
 
+        /// <summary>
+        /// Fully-typed constructor.
+        /// </summary>
+        /// <param name="title">Title of the book</param>
+        /// <param name="author">Author of the book</param>
+        /// <param name="genre">Book's genre</param>
+        /// <param name="isbn">Book's unique isbn</param>
+        public Book (string title, string author, string genre, string isbn)
+        {
+            Title = title;
+            Author = author;
+            Genre = genre;
+            Isbn = isbn;
+        }
     }
 }
