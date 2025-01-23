@@ -6,4 +6,4 @@
 [Google Books API Documentation](https://developers.google.com/books)   
 [Google Books API Classes](https://googleapis.dev/dotnet/Google.Apis.Books.v1/latest/api/Google.Apis.Books.v1.html)   
 [Cloud hosting Platform for Backend](https://www.heroku.com/)   
-<a href="https://www.example.com" target="pdf">XAML Cheatsheet</a>
+<a href="https://www.cheat-sheets.org/saved-copy/wpfcheatsheet.pdf" target="pdf">XAML Cheatsheet</a>
