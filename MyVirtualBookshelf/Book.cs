@@ -18,22 +18,22 @@ namespace MyVirtualBookshelf
         /// <summary>
         /// Title of the book.
         /// </summary>
-        public string title { get; set; }
+        public string Title { get; set; }
 
         /// <summary>
         /// Author of the book.
         /// </summary>
-        public string author { get; set; }
+        public string Author { get; set; }
 
         /// <summary>
         /// Genre of the book.
         /// </summary>
-        public string genre { get; set; }
+        public string Genre { get; set; }
         
         /// <summary>
         /// Unique identifier of the book.
         /// </summary>
-        public string isbn { get; set; }
+        public string Isbn { get; set; }
 
     }
 }
