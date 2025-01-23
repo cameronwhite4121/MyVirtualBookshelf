@@ -29,7 +29,7 @@ namespace MyVirtualBookshelf
         /// <param name="name">The name of the shelf.</param>
         public Shelf(string name) 
         {
-            this.Name = name;
+            Name = name;
             Books = new List<Book>();
         }
 
