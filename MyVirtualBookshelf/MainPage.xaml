@@ -36,13 +36,14 @@
                 
             </FlexLayout>
             
-            <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" />
+            <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" WidthRequest="1000" />
 
             <Image
                 Source="shelf_meme.jpg"
                 HeightRequest="375"
                 Aspect="AspectFit"
-                SemanticProperties.Description="Shelf meme" />
+                SemanticProperties.Description="Shelf meme"
+                Margin="10,10"/>
 
         </VerticalStackLayout>
     </ScrollView>

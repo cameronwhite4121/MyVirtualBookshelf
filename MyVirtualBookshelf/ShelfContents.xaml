@@ -4,9 +4,20 @@
              x:Class="MyVirtualBookshelf.ShelfContents"
              Title="ShelfContents">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+        <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Start" Wrap="Wrap">
+
+            <Label Text="Book Title" FontSize="20" Margin="5,5"></Label>
+            <Label Text="Book Author" FontSize="20" Margin="5,5"></Label>
+            <Label Text="Book Genre" FontSize="20" Margin="5,5"></Label>
+            <Label Text="Book Isbn" FontSize="20" Margin="5,5"></Label>
+
+        </FlexLayout>
+
+        <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" WidthRequest="1000" Margin="10,20" />
+
+        <Label Text="Use grid layout for responsive columns instead" HorizontalOptions="Center" FontSize="30" Margin="5,5"></Label>
+
     </VerticalStackLayout>
+
 </ContentPage>
