@@ -7,9 +7,25 @@
     Shell.FlyoutBehavior="Flyout"
     Title="MyVirtualBookshelf">
 
+    <Shell.FlyoutHeader>
+        <StackLayout Padding="10" BackgroundColor="#2D3B45">
+            <Label Text="My Virtual Bookshelf"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <ShellContent
+    Title="ShelfContents"
+    ContentTemplate="{DataTemplate local:ShelfContents}"
+    Route="ShelfContents" />
 
 </Shell>

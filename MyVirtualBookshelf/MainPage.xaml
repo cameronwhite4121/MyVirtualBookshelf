@@ -14,11 +14,6 @@
                 SemanticProperties.Description="Cartoon Bookshelf" />
 
             <Label
-                Text="Hello, Cameron!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
-            <Label
                 Text="Welcome to &#10; Your Very Own Virtual Bookshelf!"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
@@ -41,13 +36,14 @@
                 
             </FlexLayout>
             
-            <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" />
+            <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" WidthRequest="1000" />
 
             <Image
                 Source="shelf_meme.jpg"
                 HeightRequest="375"
                 Aspect="AspectFit"
-                SemanticProperties.Description="Shelf meme" />
+                SemanticProperties.Description="Shelf meme"
+                Margin="10,10"/>
 
         </VerticalStackLayout>
     </ScrollView>

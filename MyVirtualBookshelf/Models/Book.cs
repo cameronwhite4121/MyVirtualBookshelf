@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 #nullable disable
 
-namespace MyVirtualBookshelf
+namespace MyVirtualBookshelf.Models
 {
     /// <summary>
     /// Book class represents a book that is being
@@ -29,7 +29,7 @@ namespace MyVirtualBookshelf
         /// Genre of the book.
         /// </summary>
         public string Genre { get; set; }
-        
+
         /// <summary>
         /// Unique identifier of the book.
         /// </summary>
@@ -42,7 +42,7 @@ namespace MyVirtualBookshelf
         /// <param name="author">Author of the book</param>
         /// <param name="genre">Book's genre</param>
         /// <param name="isbn">Book's unique isbn</param>
-        public Book (string title, string author, string genre, string isbn)
+        public Book(string title, string author, string genre, string isbn)
         {
             Title = title;
             Author = author;
