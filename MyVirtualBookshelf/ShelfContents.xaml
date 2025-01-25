@@ -5,18 +5,16 @@
              Title="ShelfContents">
     <VerticalStackLayout>
 
-        <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Start" Wrap="Wrap">
-
-            <Label Text="Book Title" FontSize="20" Margin="5,5"></Label>
-            <Label Text="Book Author" FontSize="20" Margin="5,5"></Label>
-            <Label Text="Book Genre" FontSize="20" Margin="5,5"></Label>
-            <Label Text="Book Isbn" FontSize="20" Margin="5,5"></Label>
-
-        </FlexLayout>
+        <Grid Padding="10" RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="*, *, *, *">
+            <Label Text="Book Title" FontSize="20" Grid.Row="1" Grid.Column="0" Margin="5"/>
+            <Label Text="Book Author" FontSize="20" Grid.Row="1" Grid.Column="1" Margin="5"/>
+            <Label Text="Book Genre" FontSize="20" Grid.Row="1" Grid.Column="2" Margin="5"/>
+            <Label Text="Book ISBN" FontSize="20" Grid.Row="1" Grid.Column="3" Margin="5"/>
+        </Grid>
 
         <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" WidthRequest="1000" Margin="10,20" />
 
-        <Label Text="Use grid layout for responsive columns instead" HorizontalOptions="Center" FontSize="30" Margin="5,5"></Label>
+        <Label Text="Book info goes here" HorizontalOptions="Center" FontSize="30" Margin="5,5"></Label>
 
     </VerticalStackLayout>
 
