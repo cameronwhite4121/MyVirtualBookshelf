@@ -8,10 +8,12 @@
             Padding="30,0"
             Spacing="25">
             <Image
-                Source="dotnet_bot.png"
+                Source="beautiful_bookshelf_4464252.png"
                 HeightRequest="185"
                 Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+                SemanticProperties.Description="Cartoon Bookshelf" />
+
+cameronwhite4121-Issue#2-CreateUI
 
             <Label
                 Text="Hello, Cameron!"
@@ -20,15 +22,40 @@
 
             <Label
                 Text="Welcome to &#10; Your Very Own Virtual Bookshelf!"
+master
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Add a Shelf" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                HorizontalOptions="Fill" />
+cameronwhite4121-Issue#2-CreateUI
+            <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Center" Wrap="Wrap">
+               
+                <Label Text="Shelves" FontSize="30"></Label>
+                <Label Text="0 / 8" FontSize="30" Margin="5, 0"></Label>
+                
+                <Button x:Name="CounterBtn"
+                        Text="+" 
+                        SemanticProperties.Hint="Counts the number of times you click"
+                        Clicked="OnCounterClicked"
+                        HorizontalOptions="Fill"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        BorderColor="White"
+                        BorderWidth="2"
+                        Margin="5, 0"/>
+                
+            </FlexLayout>
+            
+            <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" />
+
+            <Image
+                Source="shelf_meme.jpg"
+                HeightRequest="375"
+                Aspect="AspectFit"
+                SemanticProperties.Description="Shelf meme" />
+
+
+ master
         </VerticalStackLayout>
     </ScrollView>
 
