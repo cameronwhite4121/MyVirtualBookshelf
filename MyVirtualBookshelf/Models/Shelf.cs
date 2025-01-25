@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 #nullable disable
 
-namespace MyVirtualBookshelf
+namespace MyVirtualBookshelf.Models
 {
     /// <summary>
     /// The shelf class is representative of a real life
@@ -21,13 +21,13 @@ namespace MyVirtualBookshelf
         /// <summary>
         /// List of all the books in the shelf.
         /// </summary>
-        public List<Book> Books {  get; set; }
+        public List<Book> Books { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the Shelf class with a specified name.
         /// </summary>
         /// <param name="name">The name of the shelf.</param>
-        public Shelf(string name) 
+        public Shelf(string name)
         {
             Name = name;
             Books = new List<Book>();

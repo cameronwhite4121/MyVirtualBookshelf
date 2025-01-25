@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace MyVirtualBookshelf
+namespace MyVirtualBookshelf.Models
 {
     public static class MauiProgram
     {
@@ -16,7 +16,7 @@ namespace MyVirtualBookshelf
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
