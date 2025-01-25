@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using MyVirtualBookshelf.Models;
 
 namespace MyVirtualBookshelf
 {
