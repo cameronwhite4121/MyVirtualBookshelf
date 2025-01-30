@@ -32,7 +32,8 @@
                         TextColor="White"
                         BorderColor="White"
                         BorderWidth="2"
-                        Margin="5, 0"/>
+                        Margin="5, 0"
+                        Clicked="CreateShelf"/>
                 
             </FlexLayout>
             
