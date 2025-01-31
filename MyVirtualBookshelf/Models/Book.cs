@@ -18,6 +18,13 @@ namespace MyVirtualBookshelf.Models
     class Book
     {
         /// <summary>
+        /// Unique identifier of the book.
+        /// </summary>
+        [PrimaryKey]
+        [Column("Isbn")]
+        public string Isbn { get; set; }
+
+        /// <summary>
         /// Title of the book.
         /// </summary>
         [Column("Title")]
@@ -34,12 +41,6 @@ namespace MyVirtualBookshelf.Models
         /// </summary>
         [Column("Genre")]
         public string Genre { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the book.
-        /// </summary>
-        [PrimaryKey]
-        public string Isbn { get; set; }
 
         /// <summary>
         /// Fully-typed constructor.

@@ -14,11 +14,13 @@ namespace MyVirtualBookshelf.Models
         /// <summary>
         /// Foreign key to Shelf class
         /// </summary>
+        [Column("ShelfId")]
         public int ShelfId { get; set; }
 
         /// <summary>
         /// Foreign key to Book class
         /// </summary>
+        [Column("Isbn")]
         public string Isbn { get; set; }
 
         /// <summary>
