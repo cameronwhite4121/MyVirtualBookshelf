@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,27 +12,26 @@ namespace MyVirtualBookshelf.Models
     /// The shelf class is representative of a real life
     /// bookshelf in that it holds a collection of books.
     /// </summary>
+    [Table("Shelves")]
     class Shelf
     {
         /// <summary>
+        /// Primary key of Shelves.
+        /// </summary>
+        [PrimaryKey, AutoIncrement]
+        [Column("Id")]
+        public int Id { get; set; }
+
+        /// <summary>
         /// Name of the shelf.
         /// </summary>
+        [Column("Name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// List of all the books in the shelf.
+        /// Parameterless constructor
         /// </summary>
-        public List<Book> Books { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the Shelf class with a specified name.
-        /// </summary>
-        /// <param name="name">The name of the shelf.</param>
-        public Shelf(string name)
-        {
-            Name = name;
-            Books = new List<Book>();
-        }
+        public Shelf() {}
 
         /// <summary>
         /// Adds a book to the shelf.
@@ -39,7 +39,8 @@ namespace MyVirtualBookshelf.Models
         /// <param name="bookToAdd">The book to add to the shelf.</param>
         public void AddBook(Book bookToAdd)
         {
-            Books.Add(bookToAdd);
+            ShelfContents shelfContents = new ShelfContents();
+            shelfContents.ShelfId = Id;
         }
 
         /// <summary>
@@ -48,7 +49,8 @@ namespace MyVirtualBookshelf.Models
         /// <param name="bookToRemove">The book to remove from the shelf.</param>
         public void RemoveBook(Book bookToRemove)
         {
-            Books.Remove(bookToRemove);
+            ShelfContents shelfContents = new ShelfContents();
+            shelfContents.ShelfId = Id;
         }
     }
 }

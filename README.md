@@ -33,4 +33,4 @@ features in mind that I'm unsure will make it to the final cut including:
 [Google Books API Classes](https://googleapis.dev/dotnet/Google.Apis.Books.v1/latest/api/Google.Apis.Books.v1.html)   
 [Cloud hosting Platform for Backend](https://www.heroku.com/)    
 [XAML Cheatsheet](https://www.cheat-sheets.org/saved-copy/wpfcheatsheet.pdf)   
-[Sqlite Documentation](https://www.sqlite.org/docs.html)
+[Sqlite Documentation](https://github.com/praeclarum/sqlite-net/wiki/Getting-Started)
