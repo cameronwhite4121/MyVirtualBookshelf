@@ -18,7 +18,7 @@ namespace MyVirtualBookshelf.Models
         /// <summary>
         /// Primary key of Shelves.
         /// </summary>
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         [Column("Id")]
         public int Id { get; set; }
 
