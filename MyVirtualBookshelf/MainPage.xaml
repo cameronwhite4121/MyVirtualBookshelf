@@ -22,7 +22,7 @@
             <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Center" Wrap="Wrap">
                
                 <Label Text="Shelves" FontSize="30"></Label>
-                <Label Text="0 / 8" FontSize="30" Margin="5, 0"></Label>
+                <Label x:Name="ShelfCounterLabel" Text="0 / 8" FontSize="30" Margin="5, 0"></Label>
                 
                 <Button x:Name="AddShelfBtn"
                         Text="+" 
@@ -57,6 +57,16 @@
                                        FontSize="18" 
                                        FontAttributes="Bold" 
                                        TextColor="White"/>
+                                <Button x:Name="DeleteShelfBtn"
+                                        Text="X" 
+                                        SemanticProperties.Hint="Removes the selected shelf"
+                                        HorizontalOptions="Fill"
+                                        BackgroundColor="Transparent"
+                                        TextColor="White"
+                                        BorderColor="White"
+                                        BorderWidth="2"
+                                        Margin="5, 0"
+                                        Clicked="DeleteShelfBtn"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
