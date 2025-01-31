@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +12,20 @@ namespace MyVirtualBookshelf.Models
     /// The shelf class is representative of a real life
     /// bookshelf in that it holds a collection of books.
     /// </summary>
+    [Table("Shelves")]
     class Shelf
     {
         /// <summary>
+        /// Primary key of Shelves. Maximum of 8 shelves allowed.
+        /// </summary>
+        [PrimaryKey]
+        [Column("Id")]
+        public int Id { get; set; }
+        /// <summary>
         /// Name of the shelf.
         /// </summary>
+        [Column("Name")]
         public string Name { get; set; }
-
-        /// <summary>
-        /// List of all the books in the shelf.
-        /// </summary>
-        public List<Book> Books { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the Shelf class with a specified name.
