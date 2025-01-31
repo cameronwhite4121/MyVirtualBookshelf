@@ -42,7 +42,8 @@ namespace MyVirtualBookshelf.Models
         /// <param name="bookToAdd">The book to add to the shelf.</param>
         public void AddBook(Book bookToAdd)
         {
-            Books.Add(bookToAdd);
+            ShelfContents shelfContents = new ShelfContents();
+            shelfContents.ShelfId = Id;
         }
 
         /// <summary>
@@ -51,7 +52,8 @@ namespace MyVirtualBookshelf.Models
         /// <param name="bookToRemove">The book to remove from the shelf.</param>
         public void RemoveBook(Book bookToRemove)
         {
-            Books.Remove(bookToRemove);
+            ShelfContents shelfContents = new ShelfContents();
+            shelfContents.ShelfId = Id;
         }
     }
 }
