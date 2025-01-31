@@ -36,15 +36,8 @@
                         Clicked="CreateShelfBtn"/>
                 
             </FlexLayout>
-            
-            <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
 
-            <Image
-                Source="shelf_meme.jpg"
-                HeightRequest="375"
-                Aspect="AspectFit"
-                SemanticProperties.Description="Shelf meme"
-                Margin="10,10"/>
+            <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
 
             <!-- ListView to display shelves -->
             <ListView x:Name="ShelvesListView" HorizontalOptions="Center">
