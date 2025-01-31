@@ -13,12 +13,22 @@ namespace MyVirtualBookshelf.Models
 
         public DatabaseHandler()
         {
-
-            _db = new SQLiteConnection("path/to/your/database");
+            string dbPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/mydatabase.db3";
+            _db = new SQLiteConnection(dbPath);
             _db.CreateTable<Shelf>();
             _db.CreateTable<Book>();
             _db.CreateTable<ShelfContents>();
         }
 
+        public void CreateShelf()
+        {
+            Shelf shelf = new Shelf();
+            _db.Insert(shelf);
+        }
+
+        public List<Shelf> GetAllShelves()
+        {
+            return _db.Table<Shelf>().ToList();
+        }
     }
 }

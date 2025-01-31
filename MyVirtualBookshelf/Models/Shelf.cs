@@ -16,11 +16,12 @@ namespace MyVirtualBookshelf.Models
     class Shelf
     {
         /// <summary>
-        /// Primary key of Shelves. Maximum of 8 shelves allowed.
+        /// Primary key of Shelves.
         /// </summary>
         [PrimaryKey]
         [Column("Id")]
         public int Id { get; set; }
+
         /// <summary>
         /// Name of the shelf.
         /// </summary>
@@ -28,13 +29,9 @@ namespace MyVirtualBookshelf.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the Shelf class with a specified name.
+        /// Parameterless constructor
         /// </summary>
-        /// <param name="name">The name of the shelf.</param>
-        public Shelf(string name)
-        {
-            Name = name;
-        }
+        public Shelf() {}
 
         /// <summary>
         /// Adds a book to the shelf.
