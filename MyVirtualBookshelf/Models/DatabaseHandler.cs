@@ -13,6 +13,7 @@ namespace MyVirtualBookshelf.Models
 
         public DatabaseHandler()
         {
+            // Make folder path for database destination
             string dbPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/mydatabase.db3";
             _db = new SQLiteConnection(dbPath);
             _db.CreateTable<Shelf>();
@@ -32,8 +33,25 @@ namespace MyVirtualBookshelf.Models
 
         public void CreateShelf()
         {
-            Shelf shelf = new Shelf();
-            _db.Insert(shelf);
+            if (GetAllShelves().Count < 8) // Only allow 8 shelves at once
+            {
+                Shelf shelf = new Shelf();
+                _db.Insert(shelf);
+            }
+        }
+
+        public void DeleteShelf(int shelfId)
+        {
+            // Use query syntax to find the shelf to delete by its Id
+            Shelf shelfToDelete = (from shelf in _db.Table<Shelf>()
+                                   where shelf.Id == shelfId
+                                   select shelf).FirstOrDefault();
+
+            // If the shelf is found, delete it
+            if (shelfToDelete != null)
+            {
+                _db.Delete(shelfToDelete);
+            }
         }
 
         public List<Shelf> GetAllShelves()
