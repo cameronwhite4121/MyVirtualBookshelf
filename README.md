@@ -11,7 +11,7 @@ features in mind that I'm unsure will make it to the final cut including:
 - and more to come as development progresses
   
 ## Main Page
-![image](https://github.com/user-attachments/assets/173f3482-3341-4a3a-b290-7691c48604ec)
+![image](https://github.com/user-attachments/assets/d34afda7-1058-430a-8574-8d7d0d6adc51)
 - Shelves are displayed with a protion of the books in the shelf being shown
 - Options to add, delete or maybe even rename shelves are given
   
