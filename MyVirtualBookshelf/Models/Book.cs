@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,26 +14,31 @@ namespace MyVirtualBookshelf.Models
     /// tracked by the user and holds various properties
     /// like title, author, genre and isbn.
     /// </summary>
+    [Table("Books")]
     class Book
     {
         /// <summary>
         /// Title of the book.
         /// </summary>
+        [Column("Title")]
         public string Title { get; set; }
 
         /// <summary>
         /// Author of the book.
         /// </summary>
+        [Column("Author")]
         public string Author { get; set; }
 
         /// <summary>
         /// Genre of the book.
         /// </summary>
+        [Column("Genre")]
         public string Genre { get; set; }
 
         /// <summary>
         /// Unique identifier of the book.
         /// </summary>
+        [PrimaryKey]
         public string Isbn { get; set; }
 
         /// <summary>

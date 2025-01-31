@@ -34,7 +34,6 @@ namespace MyVirtualBookshelf.Models
         public Shelf(string name)
         {
             Name = name;
-            Books = new List<Book>();
         }
 
         /// <summary>
