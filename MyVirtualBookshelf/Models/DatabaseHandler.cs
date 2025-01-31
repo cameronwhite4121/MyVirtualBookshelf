@@ -19,6 +19,16 @@ namespace MyVirtualBookshelf.Models
             _db.CreateTable<Book>();
             _db.CreateTable<ShelfContents>();
         }
+        public void DeleteDb()
+        {
+            string dbPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/mydatabase.db3";
+
+            // Delete the existing database file if it exists
+            if (File.Exists(dbPath))
+            {
+                File.Delete(dbPath);
+            }
+        }
 
         public void CreateShelf()
         {
