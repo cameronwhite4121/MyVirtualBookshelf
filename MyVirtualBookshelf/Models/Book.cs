@@ -18,9 +18,15 @@ namespace MyVirtualBookshelf.Models
     class Book
     {
         /// <summary>
-        /// Unique identifier of the book.
+        /// Unique identifier of the book for this application.
         /// </summary>
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
+        [Column("Id")]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// A unique 13-digit number that identifies books and other book-like products.
+        /// </summary>
         [Column("Isbn")]
         public string Isbn { get; set; }
 
