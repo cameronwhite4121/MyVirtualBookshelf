@@ -46,10 +46,13 @@
                         <ViewCell>
                             <StackLayout Padding="10" Orientation="Horizontal" HorizontalOptions="Center">
                                 <!-- Display Shelf Name -->
-                                <Label Text="I am Shelf >:)" 
-                                       FontSize="18" 
-                                       FontAttributes="Bold" 
-                                       TextColor="White"/>
+                                <Button x:Name="OpenShelfBtn" 
+                                        Text="{Binding Id, StringFormat='I am Shelf {0}'}" 
+                                        FontSize="18" 
+                                        FontAttributes="Bold" 
+                                        TextColor="White"
+                                        Clicked="OpenShelfBtn"
+                                        />
                                 <Button x:Name="DeleteShelfBtn"
                                         Text="X" 
                                         SemanticProperties.Hint="Removes the selected shelf"
