@@ -25,9 +25,7 @@
                 <Label x:Name="ShelfCounterLabel" Text="0 / 8" FontSize="30" Margin="5, 0"></Label>
                 
                 <Button x:Name="AddShelfBtn"
-                        Text="+" 
-                        SemanticProperties.Hint="Counts the number of times you click"
-                        HorizontalOptions="Fill"
+                        Text="+"
                         BackgroundColor="Transparent"
                         TextColor="White"
                         BorderColor="White"
@@ -39,35 +37,39 @@
 
             <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
 
-            <!-- ListView to display shelves -->
-            <ListView x:Name="ShelvesListView" HorizontalOptions="Center">
-                <ListView.ItemTemplate>
+            <!-- Shelves Display -->
+            <CollectionView ItemsSource="{Binding Shelves}" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10" Orientation="Horizontal" HorizontalOptions="Center">
-                                <!-- Display Shelf Name -->
-                                <Button x:Name="OpenShelfBtn" 
-                                        Text="{Binding Id, StringFormat='I am Shelf {0}'}" 
-                                        FontSize="18" 
-                                        FontAttributes="Bold" 
-                                        TextColor="White"
-                                        Clicked="OpenShelfBtn"
-                                        />
-                                <Button x:Name="DeleteShelfBtn"
-                                        Text="X" 
-                                        SemanticProperties.Hint="Removes the selected shelf"
-                                        HorizontalOptions="Fill"
-                                        BackgroundColor="Transparent"
-                                        TextColor="White"
-                                        BorderColor="White"
-                                        BorderWidth="2"
-                                        Margin="5, 0"
-                                        Clicked="DeleteShelfBtn"/>
-                            </StackLayout>
-                        </ViewCell>
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Text="{Binding Id, StringFormat='I am Shelf {0}'}"
+                                    BackgroundColor="Transparent"
+                                    TextColor="White"
+                                    Padding="10"
+                                    FontSize="24"  
+                                    Clicked="OpenShelfBtn" 
+                                    Grid.Column="0" />
+
+                            <Button Text="X" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="White" 
+                                    BorderColor="White" 
+                                    BorderWidth="2" 
+                                    HorizontalOptions="Center" 
+                                    VerticalOptions="Center" 
+                                    Clicked="DeleteShelfBtn" 
+                                    Grid.Column="1" />
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>
