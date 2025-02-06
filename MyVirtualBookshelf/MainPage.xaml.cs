@@ -1,4 +1,5 @@
 ﻿using MyVirtualBookshelf.Models;
+using System.Collections.ObjectModel;
 #nullable disable
 
 namespace MyVirtualBookshelf
@@ -6,12 +7,15 @@ namespace MyVirtualBookshelf
     public partial class MainPage : ContentPage
     {
         private DatabaseHandler _db;
+        public ObservableCollection<Shelf> Shelves { get; set; }
 
         public MainPage()
         { 
             InitializeComponent();
             _db = new DatabaseHandler();
+            Shelves = new ObservableCollection<Shelf>();
             PopulateShelves();
+            BindingContext = this;
         }
 
         public void CreateShelfBtn(object sender, EventArgs e)
@@ -47,13 +51,18 @@ namespace MyVirtualBookshelf
 
         public void PopulateShelves()
         {
-            List<Shelf> shelves = _db.GetAllShelves();
+            List<Shelf> updatedShelves = _db.GetAllShelves();
 
-            // Set the shelf count label
-            int numShelves = shelves.Count;
-            ShelfCounterLabel.Text = $"{numShelves} / 8"; // Update the counter text
+            Shelves.Clear();
 
-            ShelvesListView.ItemsSource = shelves;
-        }  
+            foreach (Shelf shelf in updatedShelves)
+            {
+                Shelves.Add(shelf);
+            }
+
+            // Update ShelfCounterLabel
+            int numShelves = Shelves.Count;
+            ShelfCounterLabel.Text = $"{numShelves} / 8";
+        }
     }
 }
