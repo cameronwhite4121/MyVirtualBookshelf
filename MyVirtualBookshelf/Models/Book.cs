@@ -15,7 +15,7 @@ namespace MyVirtualBookshelf.Models
     /// like title, author, genre and isbn.
     /// </summary>
     [Table("Books")]
-    class Book
+    public class Book
     {
         /// <summary>
         /// Unique identifier of the book for this application.

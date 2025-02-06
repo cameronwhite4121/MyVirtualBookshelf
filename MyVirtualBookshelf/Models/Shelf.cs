@@ -13,7 +13,7 @@ namespace MyVirtualBookshelf.Models
     /// bookshelf in that it holds a collection of books.
     /// </summary>
     [Table("Shelves")]
-    class Shelf
+    public class Shelf
     {
         /// <summary>
         /// Primary key of Shelves.
