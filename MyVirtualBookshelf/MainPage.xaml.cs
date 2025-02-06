@@ -23,13 +23,26 @@ namespace MyVirtualBookshelf
         public void DeleteShelfBtn(object sender, EventArgs e)
         {
             // Cast sender as a button to access BindingContext
-            Button clickedButton = (Button)sender;
+            Button clickedButton = sender as Button;
 
             // The shelf that the button was bound to. 
             Shelf shelfToDelete = clickedButton.BindingContext as Shelf;
 
             _db.DeleteShelf(shelfToDelete.Id);
             PopulateShelves();
+        }
+
+        public async void OpenShelfBtn(object sender, EventArgs e)
+        {
+            // Ensure the sender is a Button
+            Button clickedButton = sender as Button;
+
+            // Check if the clickedButton is not null and safely access its BindingContext
+            if (clickedButton != null)
+            {
+                Shelf selectedShelf = clickedButton.BindingContext as Shelf;
+                await Navigation.PushAsync(new ShelfPage(selectedShelf.Id));
+            }
         }
 
         public void PopulateShelves()

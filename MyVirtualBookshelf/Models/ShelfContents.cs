@@ -20,8 +20,8 @@ namespace MyVirtualBookshelf.Models
         /// <summary>
         /// Foreign key to Book class
         /// </summary>
-        [Column("Isbn")]
-        public string Isbn { get; set; }
+        [Column("Id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// Tracks how many of a specific book are in a specific shelf
