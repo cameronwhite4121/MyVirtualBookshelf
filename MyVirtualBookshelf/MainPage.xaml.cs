@@ -9,6 +9,8 @@ namespace MyVirtualBookshelf
         private DatabaseHandler _db;
         public ObservableCollection<Shelf> Shelves { get; set; }
 
+        int ShelfToDelete {  get; set; }
+
         public MainPage()
         { 
             InitializeComponent();
@@ -18,25 +20,48 @@ namespace MyVirtualBookshelf
             BindingContext = this;
         }
 
-        public void CreateShelfBtn(object sender, EventArgs e)
+        public void CreateShelfBtn_Clicked(object sender, EventArgs e)
         {
-            _db.CreateShelf();
+            if(ConfirmMenu.IsVisible != true)
+            {
+                _db.CreateShelf();
+                PopulateShelves();
+            } 
+        }
+
+        public void DeleteShelfBtn_Clicked(object sender, EventArgs e)
+        {
+            if (ConfirmMenu.IsVisible != true)
+            {
+                // Cast sender as a button to access BindingContext
+                Button clickedButton = sender as Button;
+
+                // The shelf that the button was bound to. 
+                Shelf shelf = clickedButton.BindingContext as Shelf;
+
+                ShelfToDelete = shelf.Id;
+
+                ConfirmMenu.IsVisible = true;
+                ConfirmMenuBackground.IsVisible = true;
+                ConfirmMenuBackground.Opacity = 0.6;
+            }
+        }
+
+        public void ConfirmDeleteBtn_Clicked(object sender, EventArgs e) 
+        {
+            ConfirmMenu.IsVisible = false;
+            ConfirmMenuBackground.IsVisible = false;
+            _db.DeleteShelf(ShelfToDelete);
             PopulateShelves();
         }
 
-        public void DeleteShelfBtn(object sender, EventArgs e)
+        public void DontDeleteBtn_Clicked(object sender, EventArgs e)
         {
-            // Cast sender as a button to access BindingContext
-            Button clickedButton = sender as Button;
-
-            // The shelf that the button was bound to. 
-            Shelf shelfToDelete = clickedButton.BindingContext as Shelf;
-
-            _db.DeleteShelf(shelfToDelete.Id);
-            PopulateShelves();
+            ConfirmMenu.IsVisible = false;
+            ConfirmMenuBackground.IsVisible = false;
         }
 
-        public async void OpenShelfBtn(object sender, EventArgs e)
+        public async void OpenShelfBtn_Clicked(object sender, EventArgs e)
         {
             // Ensure the sender is a Button
             Button clickedButton = sender as Button;
