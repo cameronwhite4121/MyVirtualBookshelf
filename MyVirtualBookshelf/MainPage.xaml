@@ -3,75 +3,125 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyVirtualBookshelf.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Image
-                Source="beautiful_bookshelf_4464252.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="Cartoon Bookshelf" />
+    <Grid>
+        <!-- Main Content -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="30,0" Spacing="25">
+                <Image Source="beautiful_bookshelf_4464252.png" 
+                       HeightRequest="185" Aspect="AspectFit" 
+                       SemanticProperties.Description="Cartoon Bookshelf" />
 
-            <Label
-                Text="Welcome to &#10; Your Very Own Virtual Bookshelf!"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                <Label Text="Welcome to &#10; Your Virtual Bookshelf!" 
+                       Style="{StaticResource SubHeadline}" 
+                       SemanticProperties.HeadingLevel="Level2" 
+                       SemanticProperties.Description="Welcome to your virtual bookshelf!" />
 
-            <FlexLayout Direction="Row" JustifyContent="Center" AlignItems="Center" Wrap="Wrap">
-               
-                <Label Text="Shelves" FontSize="30"></Label>
-                <Label x:Name="ShelfCounterLabel" Text="0 / 8" FontSize="30" Margin="5, 0"></Label>
-                
-                <Button x:Name="AddShelfBtn"
-                        Text="+"
-                        BackgroundColor="Transparent"
-                        TextColor="White"
-                        BorderColor="White"
-                        BorderWidth="2"
-                        Margin="5, 0"
-                        Clicked="CreateShelfBtn"/>
-                
-            </FlexLayout>
+                <FlexLayout Direction="Row" 
+                            JustifyContent="Center" 
+                            AlignItems="Center" 
+                            Wrap="Wrap">
+                    <Label Text="Shelves" 
+                           FontSize="30" />
+                    <Label x:Name="ShelfCounterLabel" 
+                           Text="0 / 8" 
+                           FontSize="30" 
+                           Margin="5, 0" />
+                    <Button x:Name="AddShelfBtn" 
+                            Text="+" 
+                            BackgroundColor="Transparent" 
+                            TextColor="White" 
+                            BorderColor="White" 
+                            BorderWidth="2" 
+                            Margin="5, 0" 
+                            Clicked="CreateShelfBtn_Clicked"/>
+                </FlexLayout>
 
-            <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+                <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
 
-            <!-- Shelves Display -->
-            <CollectionView ItemsSource="{Binding Shelves}" 
-                    HorizontalOptions="Center" 
-                    VerticalOptions="Center">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                <!-- Shelves Display -->
+                <CollectionView ItemsSource="{Binding Shelves}" HorizontalOptions="Center" VerticalOptions="Center">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                            <Button Text="{Binding Id, StringFormat='I am Shelf {0}'}"
-                                    BackgroundColor="Transparent"
-                                    TextColor="White"
-                                    Padding="10"
-                                    FontSize="24"  
-                                    Clicked="OpenShelfBtn" 
-                                    Grid.Column="0" />
+                                <Button Text="{Binding Id, StringFormat='I am Shelf {0}'}" 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="White" 
+                                        Padding="10" 
+                                        FontSize="24" 
+                                        Clicked="OpenShelfBtn_Clicked" 
+                                        Grid.Column="0" />
 
-                            <Button Text="X" 
-                                    BackgroundColor="Transparent" 
-                                    TextColor="White" 
-                                    BorderColor="White" 
-                                    BorderWidth="2" 
-                                    HorizontalOptions="Center" 
-                                    VerticalOptions="Center" 
-                                    Clicked="DeleteShelfBtn" 
-                                    Grid.Column="1" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                <Button Text="X" 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="White" 
+                                        BorderColor="White" 
+                                        BorderWidth="2" 
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Center"
+                                        Clicked="DeleteShelfBtn_Clicked" 
+                                        Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-        </VerticalStackLayout>
-    </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Semi-transparent overlay -->
+        <BoxView x:Name="ConfirmMenuBackground" Color="Black" Opacity="0.5" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+        <!-- Overlayed FlexLayout (pop-up menu) -->
+        <Border IsVisible="False" 
+                x:Name="ConfirmMenu" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" 
+                HeightRequest="100" 
+                WidthRequest="380" 
+                Stroke="White" 
+                StrokeThickness="2" 
+                Padding="0" 
+                StrokeShape="RoundRectangle 20">
+            <Grid>
+                <!-- Background BoxView with RGB color -->
+                <BoxView Color="#2b2924" CornerRadius="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+                <!-- FlexLayout for content -->
+                <FlexLayout Direction="Row" HorizontalOptions="Center" VerticalOptions="Center" AlignItems="Center" Padding="10">
+                    <Label Text="Delete this shelf?" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Button x:Name="ConfirmDeleteBtn" 
+                            Text="Yes" 
+                            FontSize="16" 
+                            BackgroundColor="Transparent" 
+                            TextColor="White" 
+                            BorderColor="White" 
+                            BorderWidth="2" 
+                            Margin="5, 0" 
+                            Padding="5" 
+                            WidthRequest="50" 
+                            HeightRequest="30"
+                            Clicked="ConfirmDeleteBtn_Clicked"/>
+                    <Button x:Name="DontDeleteBtn" 
+                            Text="No" 
+                            FontSize="16" 
+                            BackgroundColor="Transparent" 
+                            TextColor="White" 
+                            BorderColor="White" 
+                            BorderWidth="2" 
+                            Margin="5, 0" 
+                            Padding="5" 
+                            WidthRequest="50" 
+                            HeightRequest="30"
+                            Clicked="DontDeleteBtn_Clicked"/>
+                </FlexLayout>
+            </Grid>
+        </Border>
+        
+    </Grid>
 
 </ContentPage>
