@@ -21,13 +21,24 @@ namespace MyVirtualBookshelf.Models
         /// Foreign key to Book class
         /// </summary>
         [Column("Id")]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Tracks how many of a specific book are in a specific shelf
         /// </summary>
         [Column("Quantity")]
         public int Quantity { get; set; }
+
+        /// <summary>
+        /// Constructor for adding books to the shelf.
+        /// </summary>
+        /// <param name="shelfId">Id of the current shelf</param>
+        /// <param name="bookId">Id of the book being added</param>
+        public ShelfContents(int shelfId, int bookId)
+        {
+            ShelfId = shelfId;
+            Id = bookId;
+        }
 
     }
 }
