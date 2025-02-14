@@ -71,5 +71,10 @@ namespace MyVirtualBookshelf.Models
         {
             Title = title;
         }
+
+        // Parameterless constructor for SQLite
+        public Book()
+        {
+        }
     }
 }
