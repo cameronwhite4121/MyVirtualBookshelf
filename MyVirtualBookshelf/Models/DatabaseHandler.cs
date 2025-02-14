@@ -69,11 +69,14 @@ namespace MyVirtualBookshelf.Models
             return _db.Table<Shelf>().ToList();
         }
 
-        public void AddBookToShelf(int shelfId, string bookName)
+        public void AddBookToShelf(int shelfId, string bookTitle)
         {
             // Call GetBook
+            Book bookToAdd = GetBook(bookTitle);
 
             // Add book to ShelfContents
+            ShelfContents bookToAddToShelf = new ShelfContents(shelfId, bookTitle);
+            _db.Insert(bookToAddToShelf);
         }
 
         public Book GetBook(string bookTitle)
