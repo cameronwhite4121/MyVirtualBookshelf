@@ -76,7 +76,7 @@ namespace MyVirtualBookshelf.Models
 
             // Search for book in shelf
             ShelfContents bookToIncreaseQuantity = (from book in _db.Table<ShelfContents>()
-                                                    where book.ShelfId == shelfId && book.Id == bookToAdd.Id
+                                                    where book.ShelfId == shelfId && book.BookId == bookToAdd.Id
                                                     select book).FirstOrDefault();
 
             // If found, increase quanitity

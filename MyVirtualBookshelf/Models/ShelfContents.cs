@@ -20,8 +20,8 @@ namespace MyVirtualBookshelf.Models
         /// <summary>
         /// Foreign key to Book class
         /// </summary>
-        [Column("Id")]
-        public int Id { get; set; }
+        [Column("BookId")]
+        public int BookId { get; set; }
 
         /// <summary>
         /// Tracks how many of a specific book are in a specific shelf
@@ -37,7 +37,7 @@ namespace MyVirtualBookshelf.Models
         public ShelfContents(int shelfId, int bookId)
         {
             ShelfId = shelfId;
-            Id = bookId;
+            BookId = bookId;
         }
 
         /// <summary>
