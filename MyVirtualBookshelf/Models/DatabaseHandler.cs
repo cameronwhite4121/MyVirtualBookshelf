@@ -75,7 +75,7 @@ namespace MyVirtualBookshelf.Models
             Book bookToAdd = GetBook(bookTitle);
 
             // Add book to ShelfContents
-            ShelfContents bookToAddToShelf = new ShelfContents(shelfId, bookTitle);
+            ShelfContents bookToAddToShelf = new ShelfContents(shelfId, bookToAdd.Id);
             _db.Insert(bookToAddToShelf);
         }
 
