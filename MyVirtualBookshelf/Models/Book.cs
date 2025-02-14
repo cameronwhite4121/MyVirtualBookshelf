@@ -62,5 +62,14 @@ namespace MyVirtualBookshelf.Models
             Genre = genre;
             Isbn = isbn;
         }
+
+        /// <summary>
+        /// Temporary constructor for debugging.
+        /// </summary>
+        /// <param name="title">Title of the book</param>
+        public Book(string title)
+        {
+            Title = title;
+        }
     }
 }
