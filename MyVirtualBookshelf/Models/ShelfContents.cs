@@ -40,5 +40,10 @@ namespace MyVirtualBookshelf.Models
             Id = bookId;
         }
 
+        /// <summary>
+        /// Parameterless constructor for SQLite.
+        /// </summary>
+        public ShelfContents() { }
+
     }
 }
