@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Microsoft.Maui.Controls;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,34 @@ namespace MyVirtualBookshelf.Models
         public List<Shelf> GetAllShelves()
         {
             return _db.Table<Shelf>().ToList();
+        }
+
+        public void AddBookToShelf(int shelfId, string bookName)
+        {
+            // Call GetBook
+
+            // Add book to ShelfContents
+        }
+
+        public Book GetBook(string bookTitle)
+        {
+            // Search for bookName in books table
+            Book bookToReturn = (from book in _db.Table<Book>()
+                                   where book.Title == bookTitle
+                                   select book).FirstOrDefault();
+
+            // If found, don't add it to books table, return book
+            if (bookToReturn != null)
+            {
+                return bookToReturn;
+            }
+            else
+            {
+                _db.Insert(bookToReturn);
+                Book newBook = new(bookTitle);
+                return newBook;
+            }
+            // Else, add it to books table, return book
         }
     }
 }
