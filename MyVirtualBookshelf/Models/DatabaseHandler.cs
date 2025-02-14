@@ -88,13 +88,13 @@ namespace MyVirtualBookshelf.Models
             {
                 return bookToReturn;
             }
-            else
+            else // Else, add it to books table, return book
             {
                 _db.Insert(bookToReturn);
                 Book newBook = new(bookTitle);
                 return newBook;
             }
-            // Else, add it to books table, return book
+            
         }
     }
 }
