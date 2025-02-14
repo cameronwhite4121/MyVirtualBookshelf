@@ -74,9 +74,25 @@ namespace MyVirtualBookshelf.Models
             // Call GetBook
             Book bookToAdd = GetBook(bookTitle);
 
-            // Add book to ShelfContents
-            ShelfContents bookToAddToShelf = new ShelfContents(shelfId, bookToAdd.Id);
-            _db.Insert(bookToAddToShelf);
+            // Search for book in shelf
+            ShelfContents bookToIncreaseQuantity = (from book in _db.Table<ShelfContents>()
+                                                    where book.ShelfId == shelfId && book.Id == bookToAdd.Id
+                                                    select book).FirstOrDefault();
+
+            // If found, increase quanitity
+            if (bookToIncreaseQuantity != null)
+            {
+                bookToIncreaseQuantity.Quantity++;
+                _db.Update(bookToIncreaseQuantity);
+            }
+            else // Else, add it to the shelf
+            {
+                ShelfContents newBookToAdd = new ShelfContents(shelfId, bookToAdd.Id)
+                {
+                    Quantity = 1 // Set the initial quantity to 1
+                };
+                _db.Insert(newBookToAdd);
+            }   
         }
 
         public Book GetBook(string bookTitle)
