@@ -6,6 +6,7 @@ public partial class ShelfPage : ContentPage
 {
     public int ShelfId { get; set; }
     private DatabaseHandler _db;
+    private string SearchedBook {  get; set; }
 
     public ShelfPage(int sid)
 	{
@@ -26,7 +27,23 @@ public partial class ShelfPage : ContentPage
     /// </summary>
     private void populateShelf()
     {
-        List<ShelfContents> allBooks = _db.getShelfContents(ShelfId);
+        List<Book> allBooks = _db.GetShelfContents(ShelfId);
         ShelfContentView.ItemsSource = allBooks;
+    }
+
+    /// <summary>
+    /// When the searchbar button is clicked, it adds the value
+    /// in the searchbar to the current shelf.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void BookSearchbarButton_Clicked(object sender, EventArgs e)
+    {
+        if (!string.IsNullOrEmpty(BookSearchbar.Text)) 
+        { 
+            _db.AddBookToShelf(ShelfId, BookSearchbar.Text);
+            BookSearchbar.Text = null;
+            populateShelf();
+        }
     }
 }

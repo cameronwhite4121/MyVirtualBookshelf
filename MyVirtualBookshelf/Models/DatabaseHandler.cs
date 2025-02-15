@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Microsoft.Maui.Controls;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,12 @@ namespace MyVirtualBookshelf.Models
             _db = new SQLiteConnection(dbPath);
             _db.CreateTable<Shelf>();
             _db.CreateTable<Book>();
-            _db.CreateTable<ShelfContents>();
         }
-        public void DeleteDb()
+        /// <summary>
+        /// For debugging purposes. If this method is ever called, make sure to
+        /// comment it out or delete it after its done being used.
+        /// </summary>
+        public static void DeleteDb()
         {
             string dbPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/mydatabase.db3";
 
@@ -54,11 +58,11 @@ namespace MyVirtualBookshelf.Models
             }
         }
 
-        public List<ShelfContents> getShelfContents(int shelfId)
+        public List<Book> GetShelfContents(int shelfId)
         {
-            List<ShelfContents> shelfContents = (from sc in _db.Table<ShelfContents>()
-                                           where sc.ShelfId == shelfId
-                                           select sc).ToList();
+            List<Book> shelfContents = (from b in _db.Table<Book>()
+                                           where b.ShelfId == shelfId
+                                           select b).ToList();
 
             return shelfContents;
         }
@@ -66,6 +70,12 @@ namespace MyVirtualBookshelf.Models
         public List<Shelf> GetAllShelves()
         {
             return _db.Table<Shelf>().ToList();
+        }
+
+        public void AddBookToShelf(int shelfId, string bookTitle)
+        {
+            Book bookToAdd = new Book(shelfId, bookTitle);
+            _db.Insert(bookToAdd);
         }
     }
 }

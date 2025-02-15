@@ -32,25 +32,5 @@ namespace MyVirtualBookshelf.Models
         /// Parameterless constructor
         /// </summary>
         public Shelf() {}
-
-        /// <summary>
-        /// Adds a book to the shelf.
-        /// </summary>
-        /// <param name="bookToAdd">The book to add to the shelf.</param>
-        public void AddBook(Book bookToAdd)
-        {
-            ShelfContents shelfContents = new ShelfContents();
-            shelfContents.ShelfId = Id;
-        }
-
-        /// <summary>
-        /// Removes a book from the shelf.
-        /// </summary>
-        /// <param name="bookToRemove">The book to remove from the shelf.</param>
-        public void RemoveBook(Book bookToRemove)
-        {
-            ShelfContents shelfContents = new ShelfContents();
-            shelfContents.ShelfId = Id;
-        }
     }
 }

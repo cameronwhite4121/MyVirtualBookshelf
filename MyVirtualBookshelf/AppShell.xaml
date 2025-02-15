@@ -23,9 +23,4 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
-    <ShellContent
-    Title="ShelfContents"
-    ContentTemplate="{DataTemplate local:ShelfPage}"
-    Route="ShelfContents" />
-
 </Shell>
