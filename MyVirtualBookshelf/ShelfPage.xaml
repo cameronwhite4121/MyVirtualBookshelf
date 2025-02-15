@@ -77,7 +77,7 @@
                     <ViewCell>
                         <StackLayout Padding="10" Orientation="Horizontal" HorizontalOptions="Center">
                             <Label 
-                            Text="I am Book >:)" 
+                            Text="{Binding Title}" 
                             FontSize="18" 
                             FontAttributes="Bold" 
                             TextColor="White"
