@@ -71,11 +71,12 @@ namespace MyVirtualBookshelf.Models
         }
 
         /// <summary>
-        /// Temporary constructor for debugging.
+        /// Constructor for adding a book to a shelf.
         /// </summary>
         /// <param name="title">Title of the book</param>
-        public Book(string title)
+        public Book(int shelfId, string title)
         {
+            ShelfId = shelfId;
             Title = title;
         }
 
