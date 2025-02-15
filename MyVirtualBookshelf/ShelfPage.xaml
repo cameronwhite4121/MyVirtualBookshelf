@@ -15,12 +15,14 @@
                    FontSize="20" 
                    FontAttributes="Bold" 
                    Margin="5" />
-            <SearchBar Placeholder="Enter Book Title" 
+            <SearchBar x:Name="BookSearchbar"
+                       Placeholder="Enter Book Title" 
                        FontSize="18" 
                        Margin="5" 
                        HorizontalOptions="FillAndExpand" 
                        WidthRequest="300"/>
-            <Button Text="+" 
+            <Button x:Name="BookSearchbarButton"
+                    Text="+" 
                     FontSize="24" 
                     BackgroundColor="#0078D4" 
                     TextColor="White" 
@@ -28,7 +30,8 @@
                     HeightRequest="45" 
                     CornerRadius="30" 
                     Margin="5"
-                    Padding="1"/>
+                    Padding="1"
+                    Clicked="BookSearchbarButton_Clicked"/>
         </FlexLayout>
 
         <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20" />
