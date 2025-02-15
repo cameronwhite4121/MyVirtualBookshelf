@@ -27,7 +27,7 @@ public partial class ShelfPage : ContentPage
     /// </summary>
     private void populateShelf()
     {
-        List<ShelfContents> allBooks = _db.GetShelfContents(ShelfId);
+        List<Book> allBooks = _db.GetShelfContents(ShelfId);
         ShelfContentView.ItemsSource = allBooks;
     }
 
