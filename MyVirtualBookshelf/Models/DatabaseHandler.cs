@@ -19,9 +19,12 @@ namespace MyVirtualBookshelf.Models
             _db = new SQLiteConnection(dbPath);
             _db.CreateTable<Shelf>();
             _db.CreateTable<Book>();
-            _db.CreateTable<ShelfContents>();
         }
-        public void DeleteDb()
+        /// <summary>
+        /// For debugging purposes. If this method is ever called, make sure to
+        /// comment it out or delete it after its done being used.
+        /// </summary>
+        public static void DeleteDb()
         {
             string dbPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/mydatabase.db3";
 
@@ -55,11 +58,11 @@ namespace MyVirtualBookshelf.Models
             }
         }
 
-        public List<ShelfContents> getShelfContents(int shelfId)
+        public List<Book> GetShelfContents(int shelfId)
         {
-            List<ShelfContents> shelfContents = (from sc in _db.Table<ShelfContents>()
-                                           where sc.ShelfId == shelfId
-                                           select sc).ToList();
+            List<Book> shelfContents = (from b in _db.Table<Book>()
+                                           where b.ShelfId == shelfId
+                                           select b).ToList();
 
             return shelfContents;
         }
@@ -71,49 +74,8 @@ namespace MyVirtualBookshelf.Models
 
         public void AddBookToShelf(int shelfId, string bookTitle)
         {
-            // Call GetBook
-            Book bookToAdd = GetBook(bookTitle);
-
-            // Search for book in shelf
-            ShelfContents bookToIncreaseQuantity = (from book in _db.Table<ShelfContents>()
-                                                    where book.ShelfId == shelfId && book.BookId == bookToAdd.Id
-                                                    select book).FirstOrDefault();
-
-            // If found, increase quanitity
-            if (bookToIncreaseQuantity != null)
-            {
-                bookToIncreaseQuantity.Quantity++;
-                _db.Update(bookToIncreaseQuantity);
-            }
-            else // Else, add it to the shelf
-            {
-                ShelfContents newBookToAdd = new ShelfContents(shelfId, bookToAdd.Id)
-                {
-                    Quantity = 1 // Set the initial quantity to 1
-                };
-                _db.Insert(newBookToAdd);
-            }   
-        }
-
-        public Book GetBook(string bookTitle)
-        {
-            // Search for bookName in books table
-            Book bookToReturn = (from book in _db.Table<Book>()
-                                   where book.Title == bookTitle
-                                   select book).FirstOrDefault();
-
-            // If found, don't add it to books table, return book
-            if (bookToReturn != null)
-            {
-                return bookToReturn;
-            }
-            else // Else, add it to books table, return book
-            {
-                _db.Insert(bookToReturn);
-                Book newBook = new(bookTitle);
-                return newBook;
-            }
-            
+            Book bookToAdd = new Book(shelfId, bookTitle);
+            _db.Insert(bookToAdd);
         }
     }
 }
