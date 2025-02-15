@@ -25,6 +25,13 @@ namespace MyVirtualBookshelf.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// DotNet maui doesn't support foreign keys so we'll have to be
+        /// conscious of that in code.
+        /// </summary>
+        [Column("ShelfId")]
+        public int ShelfId { get; set; }
+
+        /// <summary>
         /// A unique 13-digit number that identifies books and other book-like products.
         /// </summary>
         [Column("Isbn")]
