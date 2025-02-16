@@ -7,29 +7,32 @@ namespace MyVirtualBookshelf
     public partial class MainPage : ContentPage
     {
         private DatabaseHandler _db;
-        public ObservableCollection<Shelf> Shelves { get; set; }
 
-        int ShelfToDelete {  get; set; }
+        public ObservableCollection<Bookshelf> Bookshelves { get; set; }
+
+        int BookshelfId {  get; set; }
 
         public MainPage()
         { 
             InitializeComponent();
+
             _db = new DatabaseHandler();
-            Shelves = new ObservableCollection<Shelf>();
-            PopulateShelves();
+            Bookshelves = new ObservableCollection<Bookshelf>();
+
+            PopulateBookshelves();
             BindingContext = this;
         }
 
-        public void CreateShelfBtn_Clicked(object sender, EventArgs e)
+        public void CreateBookshelfBtn_Clicked(object sender, EventArgs e)
         {
             if(ConfirmMenu.IsVisible != true)
             {
-                _db.CreateShelf();
-                PopulateShelves();
+                _db.CreateBookshelf();
+                PopulateBookshelves();
             } 
         }
 
-        public void DeleteShelfBtn_Clicked(object sender, EventArgs e)
+        public void DeleteBookshelfBtn_Clicked(object sender, EventArgs e)
         {
             if (ConfirmMenu.IsVisible != true)
             {
@@ -37,9 +40,9 @@ namespace MyVirtualBookshelf
                 Button clickedButton = sender as Button;
 
                 // The shelf that the button was bound to. 
-                Shelf shelf = clickedButton.BindingContext as Shelf;
+                Bookshelf bookshelf = clickedButton.BindingContext as Bookshelf;
 
-                ShelfToDelete = shelf.Id;
+                BookshelfId = bookshelf.Id;
 
                 ConfirmMenu.IsVisible = true;
                 ConfirmMenuBackground.IsVisible = true;
@@ -51,8 +54,8 @@ namespace MyVirtualBookshelf
         {
             ConfirmMenu.IsVisible = false;
             ConfirmMenuBackground.IsVisible = false;
-            _db.DeleteShelf(ShelfToDelete);
-            PopulateShelves();
+            _db.DeleteBookshelf(BookshelfId);
+            PopulateBookshelves();
         }
 
         public void DontDeleteBtn_Clicked(object sender, EventArgs e)
@@ -61,7 +64,7 @@ namespace MyVirtualBookshelf
             ConfirmMenuBackground.IsVisible = false;
         }
 
-        public async void OpenShelfBtn_Clicked(object sender, EventArgs e)
+        public async void OpenBookshelfBtn_Clicked(object sender, EventArgs e)
         {
             // Ensure the sender is a Button
             Button clickedButton = sender as Button;
@@ -69,25 +72,25 @@ namespace MyVirtualBookshelf
             // Check if the clickedButton is not null and safely access its BindingContext
             if (clickedButton != null)
             {
-                Shelf selectedShelf = clickedButton.BindingContext as Shelf;
-                await Navigation.PushAsync(new ShelfPage(selectedShelf.Id));
+                Bookshelf selectedBookshelf = clickedButton.BindingContext as Bookshelf;
+                await Navigation.PushAsync(new BookshelfPage(selectedBookshelf.Id));
             }
         }
 
-        public void PopulateShelves()
+        public void PopulateBookshelves()
         {
-            List<Shelf> updatedShelves = _db.GetAllShelves();
+            Bookshelves.Clear();
 
-            Shelves.Clear();
+            List<Bookshelf> updatedBookshelves = _db.GetAllBookshelves();
 
-            foreach (Shelf shelf in updatedShelves)
+            foreach (Bookshelf bookshelf in updatedBookshelves)
             {
-                Shelves.Add(shelf);
+                Bookshelves.Add(bookshelf);
             }
 
-            // Update ShelfCounterLabel
-            int numShelves = Shelves.Count;
-            ShelfCounterLabel.Text = $"{numShelves} / 8";
+            // Update BookshelfCount.Text
+            int numBookshelves = Bookshelves.Count;
+            BookshelfCountLabel.Text = $"{numBookshelves} / 8";
         }
     }
 }

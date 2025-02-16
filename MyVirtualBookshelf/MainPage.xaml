@@ -20,26 +20,26 @@
                             JustifyContent="Center" 
                             AlignItems="Center" 
                             Wrap="Wrap">
-                    <Label Text="Shelves" 
+                    <Label Text="Bookshelves" 
                            FontSize="30" />
-                    <Label x:Name="ShelfCounterLabel" 
+                    <Label x:Name="BookshelfCountLabel" 
                            Text="0 / 8" 
                            FontSize="30" 
                            Margin="5, 0" />
-                    <Button x:Name="AddShelfBtn" 
+                    <Button x:Name="AddBookshelfBtn" 
                             Text="+" 
                             BackgroundColor="Transparent" 
                             TextColor="White" 
                             BorderColor="White" 
                             BorderWidth="2" 
                             Margin="5, 0" 
-                            Clicked="CreateShelfBtn_Clicked"/>
+                            Clicked="CreateBookshelfBtn_Clicked"/>
                 </FlexLayout>
 
                 <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
 
-                <!-- Shelves Display -->
-                <CollectionView ItemsSource="{Binding Shelves}" HorizontalOptions="Center" VerticalOptions="Center">
+                <!-- Bookshelves Display -->
+                <CollectionView ItemsSource="{Binding Bookshelves}" HorizontalOptions="Center" VerticalOptions="Center">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid HorizontalOptions="Center" VerticalOptions="Center">
@@ -48,12 +48,12 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Button Text="{Binding Id, StringFormat='I am Shelf {0}'}" 
+                                <Button Text="{Binding Id, StringFormat='Bookshelf {0}'}" 
                                         BackgroundColor="Transparent" 
                                         TextColor="White" 
                                         Padding="10" 
                                         FontSize="24" 
-                                        Clicked="OpenShelfBtn_Clicked" 
+                                        Clicked="OpenBookshelfBtn_Clicked" 
                                         Grid.Column="0" />
 
                                 <Button Text="X" 
@@ -63,7 +63,7 @@
                                         BorderWidth="2" 
                                         HorizontalOptions="Center" 
                                         VerticalOptions="Center"
-                                        Clicked="DeleteShelfBtn_Clicked" 
+                                        Clicked="DeleteBookshelfBtn_Clicked" 
                                         Grid.Column="1" />
                             </Grid>
                         </DataTemplate>
@@ -93,7 +93,7 @@
 
                 <!-- FlexLayout for content -->
                 <FlexLayout Direction="Row" HorizontalOptions="Center" VerticalOptions="Center" AlignItems="Center" Padding="10">
-                    <Label Text="Delete this shelf?" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="Delete this bookshelf?" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Button x:Name="ConfirmDeleteBtn" 
                             Text="Yes" 
                             FontSize="16" 

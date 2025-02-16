@@ -23,14 +23,22 @@ namespace MyVirtualBookshelf.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Name of the shelf.
+        /// Reference to the bookshelf that this shelf is contained in
         /// </summary>
-        [Column("Name")]
-        public string Name { get; set; }
+        [Column("BookshelfId")]
+        public int BookshelfId { get; set; }
 
         /// <summary>
         /// Parameterless constructor
         /// </summary>
         public Shelf() {}
+
+        /// <summary>
+        /// References a bookshelf to this shelf.
+        /// </summary>
+        public Shelf(int bookshelfId) 
+        {
+            BookshelfId = bookshelfId;
+        }
     }
 }

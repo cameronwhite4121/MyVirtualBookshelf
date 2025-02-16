@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyVirtualBookshelf.BookshelfPage"
+             Title="BookshelfPage">
+
+    <VerticalStackLayout>
+
+        <!-- Shelves Display -->
+        <CollectionView ItemsSource="{Binding Shelves}" HorizontalOptions="Center" VerticalOptions="Center">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Text="{Binding Id, StringFormat='Shelf {0}'}" 
+                                BackgroundColor="Transparent" 
+                                TextColor="White" 
+                                Padding="10" 
+                                FontSize="24" 
+                                Clicked="OpenShelfBtn_Clicked" 
+                                Grid.Column="0" />
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

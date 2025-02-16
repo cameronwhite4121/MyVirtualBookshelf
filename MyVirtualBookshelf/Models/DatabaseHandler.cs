@@ -17,6 +17,7 @@ namespace MyVirtualBookshelf.Models
             // Make folder path for database destination
             string dbPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/mydatabase.db3";
             _db = new SQLiteConnection(dbPath);
+            _db.CreateTable<Bookshelf>();
             _db.CreateTable<Shelf>();
             _db.CreateTable<Book>();
         }
@@ -35,27 +36,74 @@ namespace MyVirtualBookshelf.Models
             }
         }
 
-        public void CreateShelf()
+        public void CreateBookshelf()
         {
-            if (GetAllShelves().Count < 8) // Only allow 8 shelves at once
+            if (GetAllBookshelves().Count < 8) // Only allow 8 shelves at once
             {
-                Shelf shelf = new Shelf();
-                _db.Insert(shelf);
+                Bookshelf bookshelf = new();
+                _db.Insert(bookshelf);
+
+                List<Shelf> shelves = new List<Shelf>
+                {
+                     new(bookshelf.Id),
+                     new(bookshelf.Id),
+                     new(bookshelf.Id),
+                     new(bookshelf.Id),
+                     new(bookshelf.Id),
+                     new(bookshelf.Id),
+                     new(bookshelf.Id),
+                     new(bookshelf.Id)
+                };            
+                _db.InsertAll(shelves);
             }
         }
 
-        public void DeleteShelf(int shelfId)
-        {
+        public void DeleteBookshelf(int bookshelfId)
+        {        
             // Use query syntax to find the shelf to delete by its Id
-            Shelf shelfToDelete = (from shelf in _db.Table<Shelf>()
-                                   where shelf.Id == shelfId
-                                   select shelf).FirstOrDefault();
+            Bookshelf bookshelfToDelete = (from bks in _db.Table<Bookshelf>()
+                                           where bks.Id == bookshelfId
+                                           select bks).FirstOrDefault();
 
-            // If the shelf is found, delete it
-            if (shelfToDelete != null)
+            // Delete every shelf in the bookshelf
+            List<Shelf> shelvesToDelete = (from s in _db.Table<Shelf>()
+                                           where s.BookshelfId == bookshelfId
+                                           select s).ToList();
+
+            
+
+
+            // If the bookshelf is found, delete it and its contents from top to bottom
+            if (bookshelfToDelete != null)
             {
-                _db.Delete(shelfToDelete);
+                foreach (Shelf shelf in shelvesToDelete)
+                {
+                    // Delete every book in the shelf
+                    List<Book> booksToDelete = (from b in _db.Table<Book>()
+                                                where b.ShelfId == shelf.Id
+                                                select b).ToList();
+
+                    foreach (Book book in booksToDelete)
+                    {
+                        _db.Delete(book);
+                    }
+
+                    // Delete the shelf when its contents are deleted
+                    _db.Delete(shelf);
+                }
+
+                // Delete the bookshelf when its contents are deleted
+                _db.Delete(bookshelfToDelete);
             }
+        }
+
+        public List<Shelf> GetBookshelfContents(int bookshelfId)
+        {
+            List<Shelf> shelves = (from s in _db.Table<Shelf>()
+                                   where s.BookshelfId == bookshelfId
+                                   select s).ToList();
+
+            return shelves;
         }
 
         public List<Book> GetShelfContents(int shelfId)
@@ -67,9 +115,9 @@ namespace MyVirtualBookshelf.Models
             return shelfContents;
         }
 
-        public List<Shelf> GetAllShelves()
+        public List<Bookshelf> GetAllBookshelves()
         {
-            return _db.Table<Shelf>().ToList();
+            return _db.Table<Bookshelf>().ToList();
         }
 
         public void AddBookToShelf(int shelfId, string bookTitle)
