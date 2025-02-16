@@ -6,6 +6,7 @@ namespace MyVirtualBookshelf;
 public partial class BookshelfPage : ContentPage
 {
     public int BookshelfId { get; set; }
+    public ObservableCollection<Shelf> Shelves { get; set; }
     private DatabaseHandler _db;
 
     public BookshelfPage(int bookshelfId)
@@ -18,13 +19,21 @@ public partial class BookshelfPage : ContentPage
 
         // Display the shelves in the bokshelf 
         _db = new DatabaseHandler();
+        Shelves = new ObservableCollection<Shelf>();
         PopulateBookshelf();
     }
 
     public void PopulateBookshelf()
     {
+        Shelves.Clear();
+
         List<Shelf> updatedShelves = _db.GetBookshelfContents(BookshelfId);
-        ShelvesView.ItemsSource = updatedShelves;
+
+        foreach (Shelf shelf in updatedShelves)
+        {
+            Shelves.Add(shelf);
+        }
+
     }
 
     public async void OpenShelfBtn_Clicked(object sender, EventArgs e)

@@ -39,33 +39,36 @@
                 <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
 
                 <!-- Bookshelves Display -->
-                <ListView x:Name="BookshelvesList" HorizontalOptions="Center">
-                    <ListView.ItemTemplate>
+                <CollectionView ItemsSource="{Binding Bookshelves}" HorizontalOptions="Center" VerticalOptions="Center">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Padding="10" Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Button Text="{Binding Id, StringFormat='Bookshelf {0}'}" 
-                                            BackgroundColor="Transparent" 
-                                            TextColor="White" 
-                                            Padding="10" 
-                                            FontSize="24" 
-                                            Clicked="OpenBookshelfBtn_Clicked" 
-                                            Grid.Column="0" />
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                                    <Button Text="X" 
-                                            BackgroundColor="Transparent" 
-                                            TextColor="White" 
-                                            BorderColor="White" 
-                                            BorderWidth="2" 
-                                            HorizontalOptions="Center" 
-                                            VerticalOptions="Center"
-                                            Clicked="DeleteBookshelfBtn_Clicked" 
-                                            Grid.Column="1" />
-                                </StackLayout>
-                            </ViewCell>
+                                <Button Text="{Binding Id, StringFormat='Bookshelf {0}'}" 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="White" 
+                                        Padding="10" 
+                                        FontSize="24" 
+                                        Clicked="OpenBookshelfBtn_Clicked" 
+                                        Grid.Column="0" />
+
+                                <Button Text="X" 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="White" 
+                                        BorderColor="White" 
+                                        BorderWidth="2" 
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Center"
+                                        Clicked="DeleteBookshelfBtn_Clicked" 
+                                        Grid.Column="1" />
+                            </Grid>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
             </VerticalStackLayout>
         </ScrollView>
