@@ -97,6 +97,15 @@ namespace MyVirtualBookshelf.Models
             }
         }
 
+        public List<Shelf> GetBookshelfContents(int bookshelfId)
+        {
+            List<Shelf> shelves = (from s in _db.Table<Shelf>()
+                                   where s.BookshelfId == bookshelfId
+                                   select s).ToList();
+
+            return shelves;
+        }
+
         public List<Book> GetShelfContents(int shelfId)
         {
             List<Book> shelfContents = (from b in _db.Table<Book>()
