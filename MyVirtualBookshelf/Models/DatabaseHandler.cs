@@ -17,6 +17,7 @@ namespace MyVirtualBookshelf.Models
             // Make folder path for database destination
             string dbPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/mydatabase.db3";
             _db = new SQLiteConnection(dbPath);
+            _db.CreateTable<Bookshelf>();
             _db.CreateTable<Shelf>();
             _db.CreateTable<Book>();
         }
