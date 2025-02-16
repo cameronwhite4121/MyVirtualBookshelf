@@ -5,22 +5,21 @@ namespace MyVirtualBookshelf;
 
 public partial class BookshelfPage : ContentPage
 {
-    public int BookshelfId { get; set; }
-    public ObservableCollection<Shelf> Shelves { get; set; }
     private DatabaseHandler _db;
-
+    public ObservableCollection<Shelf> Shelves { get; set; }
+    int BookshelfId { get; set; }
+    
     public BookshelfPage(int bookshelfId)
     {
         this.BookshelfId = bookshelfId;
         InitializeComponent();
 
-        // BindingContext is set for data binding
-        this.BindingContext = this;
-
-        // Display the shelves in the bokshelf 
+        // Display the shelves in the bookshelf 
         _db = new DatabaseHandler();
         Shelves = new ObservableCollection<Shelf>();
+
         PopulateBookshelf();
+        this.BindingContext = this;
     }
 
     public void PopulateBookshelf()

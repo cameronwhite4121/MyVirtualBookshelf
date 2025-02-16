@@ -15,8 +15,10 @@ namespace MyVirtualBookshelf
         public MainPage()
         { 
             InitializeComponent();
+
             _db = new DatabaseHandler();
             Bookshelves = new ObservableCollection<Bookshelf>();
+
             PopulateBookshelves();
             BindingContext = this;
         }
