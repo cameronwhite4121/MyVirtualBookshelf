@@ -10,7 +10,7 @@ namespace MyVirtualBookshelf.Models
     /// <summary>
     /// Bookshelf stores references to shelves
     /// </summary>
-    [Table("Shelves")]
+    [Table("Bookshelves")]
     public class Bookshelf
     {
         /// <summary>
@@ -19,12 +19,6 @@ namespace MyVirtualBookshelf.Models
         [PrimaryKey, AutoIncrement]
         [Column("Id")]
         public int Id { get; set; }
-
-        /// <summary>
-        /// Reference to the bookshelf's shelfs.
-        /// </summary>
-        [Column("ShelfId")]
-        public int ShelfId { get; set; }
 
         /// <summary>
         /// Parameterless constructor
