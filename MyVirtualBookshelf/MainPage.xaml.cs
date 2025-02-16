@@ -7,16 +7,12 @@ namespace MyVirtualBookshelf
     public partial class MainPage : ContentPage
     {
         private DatabaseHandler _db;
-
-        public ObservableCollection<Bookshelf> Bookshelves { get; set; }
-
         int BookshelfId {  get; set; }
 
         public MainPage()
         { 
             InitializeComponent();
             _db = new DatabaseHandler();
-            Bookshelves = new ObservableCollection<Bookshelf>();
             PopulateBookshelves();
             BindingContext = this;
         }
@@ -71,23 +67,17 @@ namespace MyVirtualBookshelf
             if (clickedButton != null)
             {
                 Bookshelf selectedBookshelf = clickedButton.BindingContext as Bookshelf;
-                await Navigation.PushAsync(new ShelfPage(selectedBookshelf.Id));
+                await Navigation.PushAsync(new BookshelfPage(selectedBookshelf.Id));
             }
         }
 
         public void PopulateBookshelves()
         {
-            Bookshelves.Clear();
-
-            List<Bookshelf> updatedBookshelves = _db.GetAllBookshelves();        
-
-            foreach (Bookshelf bookshelf in updatedBookshelves)
-            {
-                Bookshelves.Add(bookshelf);
-            }
+            List<Bookshelf> updatedBookshelves = _db.GetAllBookshelves();
+            BookshelvesList.ItemsSource = updatedBookshelves;
 
             // Update BookshelfCount.Text
-            int numBookshelves = Bookshelves.Count;
+            int numBookshelves = updatedBookshelves.Count;
             BookshelfCountLabel.Text = $"{numBookshelves} / 8";
         }
     }

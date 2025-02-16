@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyVirtualBookshelf.BookshelfPage"
+             Title="Shelves">
+
+    <VerticalStackLayout>
+
+        <!-- Shelves Display -->
+        <ListView x:Name="ShelvesView" HorizontalOptions="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" Orientation="Horizontal" HorizontalOptions="Center">
+                            <Button Text="{Binding Id, StringFormat='Shelf {0}'}" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="White" 
+                                    Padding="10" 
+                                    FontSize="24" 
+                                    Clicked="OpenShelfBtn_Clicked" 
+                                    Grid.Column="0" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+</ContentPage>

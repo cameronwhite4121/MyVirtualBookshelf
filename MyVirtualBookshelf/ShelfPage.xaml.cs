@@ -1,10 +1,11 @@
 using MyVirtualBookshelf.Models;
+using System.Collections.ObjectModel;
 #nullable disable
 namespace MyVirtualBookshelf;
 
 public partial class ShelfPage : ContentPage
 {
-    public int ShelfId { get; set; }
+    public int ShelfId { get; set; } 
     private DatabaseHandler _db;
     private string SearchedBook {  get; set; }
 
@@ -28,7 +29,7 @@ public partial class ShelfPage : ContentPage
     private void populateShelf()
     {
         List<Book> allBooks = _db.GetShelfContents(ShelfId);
-        ShelfContentView.ItemsSource = allBooks;
+        BookList.ItemsSource = allBooks;
     }
 
     /// <summary>
