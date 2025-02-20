@@ -5,31 +5,40 @@ namespace MyVirtualBookshelf;
 
 public partial class ShelfPage : ContentPage
 {
-    public int ShelfId { get; set; } 
+    
     private DatabaseHandler _db;
+    public ObservableCollection<Book> Books { get; set; }
     private string SearchedBook {  get; set; }
+    private int BookId { get; set; }
+    public int ShelfId { get; set; }
 
     public ShelfPage(int sid)
 	{
-		this.ShelfId = sid;
         InitializeComponent();
-        
-        // BindingContext is set for data binding
-        this.BindingContext = this;
+        this.ShelfId = sid;
 
         // Displays list of books on the page 
         _db = new DatabaseHandler();
-        populateShelf();
-	}
+        Books = new ObservableCollection<Book>();
+
+        PopulateShelf();
+        this.BindingContext = this;
+    }
 
     /// <summary>
     /// Calls the database and retrieves every book for the shelf via
     /// the ShelfId property.
     /// </summary>
-    private void populateShelf()
+    public void PopulateShelf()
     {
-        List<Book> allBooks = _db.GetShelfContents(ShelfId);
-        BookList.ItemsSource = allBooks;
+        Books.Clear();
+
+        List<Book> updatedShelf = _db.GetShelfContents(ShelfId);
+
+        foreach (Book book in updatedShelf)
+        {
+            Books.Add(book);
+        }
     }
 
     /// <summary>
@@ -44,7 +53,38 @@ public partial class ShelfPage : ContentPage
         { 
             _db.AddBookToShelf(ShelfId, BookSearchbar.Text);
             BookSearchbar.Text = null;
-            populateShelf();
+            PopulateShelf();
         }
+    }
+
+    public void DeleteBookBtn_Clicked(object sender, EventArgs e)
+    {
+        if (!ConfirmMenu.IsVisible)
+        {
+            // Cast sender as a button to access BindingContext
+            Button clickedButton = sender as Button;
+
+            // The shelf that the button was bound to. 
+            Book book = clickedButton.BindingContext as Book;
+            BookId = book.Id;
+
+            ConfirmMenu.IsVisible = true;
+            ConfirmMenuBackground.IsVisible = true;
+        }
+    }
+
+    public void ConfirmDeleteBtn_Clicked(object sender, EventArgs e)
+    {
+        ConfirmMenu.IsVisible = false;
+        ConfirmMenuBackground.IsVisible = false;
+
+        _db.DeleteBook(ShelfId, BookId);
+        PopulateShelf();
+    }
+
+    public void DontDeleteBtn_Clicked(object sender, EventArgs e)
+    {
+        ConfirmMenu.IsVisible = false;
+        ConfirmMenuBackground.IsVisible = false;
     }
 }
