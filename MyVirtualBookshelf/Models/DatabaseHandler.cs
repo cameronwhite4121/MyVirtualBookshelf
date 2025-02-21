@@ -125,5 +125,19 @@ namespace MyVirtualBookshelf.Models
             Book bookToAdd = new Book(shelfId, bookTitle);
             _db.Insert(bookToAdd);
         }
+
+        public void DeleteBook(int shelfId, int bookId)
+        {
+            // Use query syntax to find the book to delete by its Id and the Shelf Id
+            Book bookToDelete = (from b in _db.Table<Book>()
+                                 where b.Id == bookId && b.ShelfId == shelfId                                      
+                                 select b).FirstOrDefault();
+
+            // If the book is found, delete it from the shelf
+            if (bookToDelete != null)
+            {
+                _db.Delete(bookToDelete);
+            }
+        }
     }
 }

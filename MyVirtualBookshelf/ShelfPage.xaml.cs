@@ -5,46 +5,90 @@ namespace MyVirtualBookshelf;
 
 public partial class ShelfPage : ContentPage
 {
-    public int ShelfId { get; set; } 
+    
     private DatabaseHandler _db;
-    private string SearchedBook {  get; set; }
+    public ObservableCollection<Book> Books { get; set; }
+    public string SearchedBook {  get; set; }
+    public int BookId { get; set; }
+    public int ShelfId { get; set; }
+    public string BookTitle { get; set; }
 
     public ShelfPage(int sid)
 	{
-		this.ShelfId = sid;
         InitializeComponent();
-        
-        // BindingContext is set for data binding
-        this.BindingContext = this;
+        this.ShelfId = sid;
 
         // Displays list of books on the page 
         _db = new DatabaseHandler();
-        populateShelf();
-	}
+        Books = new ObservableCollection<Book>();
+
+        PopulateShelf();
+        this.BindingContext = this;
+    }
 
     /// <summary>
     /// Calls the database and retrieves every book for the shelf via
     /// the ShelfId property.
     /// </summary>
-    private void populateShelf()
+    public void PopulateShelf()
     {
-        List<Book> allBooks = _db.GetShelfContents(ShelfId);
-        BookList.ItemsSource = allBooks;
+        Books.Clear();
+
+        List<Book> updatedShelf = _db.GetShelfContents(ShelfId);
+
+        foreach (Book book in updatedShelf)
+        {
+            Books.Add(book);
+        }
     }
 
     /// <summary>
-    /// When the searchbar button is clicked, it adds the value
-    /// in the searchbar to the current shelf.
+    /// When the search bar button is clicked, it adds the value
+    /// in the search bar to the current shelf.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    public void BookSearchbarButton_Clicked(object sender, EventArgs e)
+    public void BookSearchBarButton_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(BookSearchbar.Text)) 
         { 
             _db.AddBookToShelf(ShelfId, BookSearchbar.Text);
             BookSearchbar.Text = null;
-            populateShelf();
+            PopulateShelf();
         }
+    }
+
+    public void DeleteBookBtn_Clicked(object sender, EventArgs e)
+    {
+        if (!ConfirmMenu.IsVisible)
+        {
+            // Cast sender as a button to access BindingContext
+            Button clickedButton = sender as Button;
+
+            // Display BookTitle to the confirmation menu 
+            Book book = clickedButton.BindingContext as Book;
+            BookId = book.Id;
+            BookTitle = book.Title;
+
+            ConfirmDeleteLabel.Text = $"Delete \"{BookTitle}\" ?";
+
+            ConfirmMenuBackground.IsVisible = true;
+            ConfirmMenu.IsVisible = true;
+        }
+    }
+
+    public void ConfirmDeleteBtn_Clicked(object sender, EventArgs e)
+    {
+        ConfirmMenu.IsVisible = false;
+        ConfirmMenuBackground.IsVisible = false;
+
+        _db.DeleteBook(ShelfId, BookId);
+        PopulateShelf();
+    }
+
+    public void DeclineDeleteBtn_Clicked(object sender, EventArgs e)
+    {
+        ConfirmMenu.IsVisible = false;
+        ConfirmMenuBackground.IsVisible = false;
     }
 }

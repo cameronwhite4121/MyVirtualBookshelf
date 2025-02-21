@@ -25,7 +25,7 @@ namespace MyVirtualBookshelf
 
         public void CreateBookshelfBtn_Clicked(object sender, EventArgs e)
         {
-            if(ConfirmMenu.IsVisible != true)
+            if(!ConfirmMenu.IsVisible)
             {
                 _db.CreateBookshelf();
                 PopulateBookshelves();
@@ -34,19 +34,17 @@ namespace MyVirtualBookshelf
 
         public void DeleteBookshelfBtn_Clicked(object sender, EventArgs e)
         {
-            if (ConfirmMenu.IsVisible != true)
+            if (!ConfirmMenu.IsVisible)
             {
                 // Cast sender as a button to access BindingContext
                 Button clickedButton = sender as Button;
 
                 // The shelf that the button was bound to. 
                 Bookshelf bookshelf = clickedButton.BindingContext as Bookshelf;
-
                 BookshelfId = bookshelf.Id;
 
                 ConfirmMenu.IsVisible = true;
                 ConfirmMenuBackground.IsVisible = true;
-                ConfirmMenuBackground.Opacity = 0.6;
             }
         }
 
@@ -54,6 +52,7 @@ namespace MyVirtualBookshelf
         {
             ConfirmMenu.IsVisible = false;
             ConfirmMenuBackground.IsVisible = false;
+
             _db.DeleteBookshelf(BookshelfId);
             PopulateBookshelves();
         }

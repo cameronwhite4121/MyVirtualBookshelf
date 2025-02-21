@@ -73,10 +73,15 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Semi-transparent overlay -->
-        <BoxView x:Name="ConfirmMenuBackground" Color="Black" Opacity="0.5" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        <!-- Semi-transparent Background -->
+        <BoxView x:Name="ConfirmMenuBackground" 
+                 Color="Black" 
+                 Opacity="0.5" 
+                 IsVisible="False" 
+                 HorizontalOptions="FillAndExpand" 
+                 VerticalOptions="FillAndExpand" />
 
-        <!-- Overlayed FlexLayout (pop-up menu) -->
+        <!-- Pop-up Menu -->
         <Border IsVisible="False" 
                 x:Name="ConfirmMenu" 
                 HorizontalOptions="Center" 
@@ -87,13 +92,25 @@
                 StrokeThickness="2" 
                 Padding="0" 
                 StrokeShape="RoundRectangle 20">
-            <Grid>
-                <!-- Background BoxView with RGB color -->
-                <BoxView Color="#2b2924" CornerRadius="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
 
-                <!-- FlexLayout for content -->
-                <FlexLayout Direction="Row" HorizontalOptions="Center" VerticalOptions="Center" AlignItems="Center" Padding="10">
-                    <Label Text="Delete this bookshelf?" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Grid>
+                <BoxView Color="#2b2924" 
+                         CornerRadius="20" 
+                         HorizontalOptions="FillAndExpand" 
+                         VerticalOptions="FillAndExpand" />
+
+                <FlexLayout Direction="Row" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center" 
+                            AlignItems="Center" 
+                            Padding="10">
+                    
+                    <Label Text="Delete this bookshelf?" 
+                           FontSize="20" 
+                           TextColor="White" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"/>
+                    
                     <Button x:Name="ConfirmDeleteBtn" 
                             Text="Yes" 
                             FontSize="16" 
@@ -106,6 +123,7 @@
                             WidthRequest="50" 
                             HeightRequest="30"
                             Clicked="ConfirmDeleteBtn_Clicked"/>
+                    
                     <Button x:Name="DontDeleteBtn" 
                             Text="No" 
                             FontSize="16" 
