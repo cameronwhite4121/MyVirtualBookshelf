@@ -8,9 +8,10 @@ public partial class ShelfPage : ContentPage
     
     private DatabaseHandler _db;
     public ObservableCollection<Book> Books { get; set; }
-    private string SearchedBook {  get; set; }
-    private int BookId { get; set; }
+    public string SearchedBook {  get; set; }
+    public int BookId { get; set; }
     public int ShelfId { get; set; }
+    public string BookTitle { get; set; }
 
     public ShelfPage(int sid)
 	{
@@ -42,12 +43,12 @@ public partial class ShelfPage : ContentPage
     }
 
     /// <summary>
-    /// When the searchbar button is clicked, it adds the value
-    /// in the searchbar to the current shelf.
+    /// When the search bar button is clicked, it adds the value
+    /// in the search bar to the current shelf.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    public void BookSearchbarButton_Clicked(object sender, EventArgs e)
+    public void BookSearchBarButton_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(BookSearchbar.Text)) 
         { 
@@ -64,12 +65,15 @@ public partial class ShelfPage : ContentPage
             // Cast sender as a button to access BindingContext
             Button clickedButton = sender as Button;
 
-            // The shelf that the button was bound to. 
+            // Display BookTitle to the confirmation menu 
             Book book = clickedButton.BindingContext as Book;
             BookId = book.Id;
+            BookTitle = book.Title;
 
-            ConfirmMenu.IsVisible = true;
+            ConfirmDeleteLabel.Text = $"Delete \"{BookTitle}\" ?";
+
             ConfirmMenuBackground.IsVisible = true;
+            ConfirmMenu.IsVisible = true;
         }
     }
 
@@ -82,7 +86,7 @@ public partial class ShelfPage : ContentPage
         PopulateShelf();
     }
 
-    public void DontDeleteBtn_Clicked(object sender, EventArgs e)
+    public void DeclineDeleteBtn_Clicked(object sender, EventArgs e)
     {
         ConfirmMenu.IsVisible = false;
         ConfirmMenuBackground.IsVisible = false;

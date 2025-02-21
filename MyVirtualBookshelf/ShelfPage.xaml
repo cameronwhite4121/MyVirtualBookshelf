@@ -3,111 +3,116 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyVirtualBookshelf.ShelfPage"
              Title="Shelf Contents">
-    <VerticalStackLayout>
+    <Grid>
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout>
 
-        <!-- Book Search Feature -->
-        <FlexLayout Padding="15" 
-                    Direction="Row" 
-                    AlignItems="Center" 
-                    JustifyContent="Start" 
-                    Wrap="Wrap">
-            <Label Text="Add a Book" 
-                   FontSize="20" 
-                   FontAttributes="Bold" 
-                   Margin="5" />
-            <SearchBar x:Name="BookSearchbar"
-                       Placeholder="Enter Book Title" 
-                       FontSize="18" 
-                       Margin="5" 
-                       HorizontalOptions="FillAndExpand" 
-                       WidthRequest="300"/>
-            <Button x:Name="BookSearchbarButton"
-                    Text="+" 
-                    FontSize="24" 
-                    BackgroundColor="#0078D4" 
-                    TextColor="White" 
-                    WidthRequest="45" 
-                    HeightRequest="45" 
-                    CornerRadius="30" 
-                    Margin="5"
-                    Padding="1"
-                    Clicked="BookSearchbarButton_Clicked"/>
-        </FlexLayout>
+                <!-- Book Search Feature -->
+                <FlexLayout Padding="15" 
+                            Direction="Row" 
+                            AlignItems="Center" 
+                            JustifyContent="Start" 
+                            Wrap="Wrap">
+                    <Label Text="Add a Book" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           Margin="5" />
+                    <SearchBar x:Name="BookSearchbar"
+                               Placeholder="Enter Book Title" 
+                               FontSize="18" 
+                               Margin="5" 
+                               HorizontalOptions="FillAndExpand" 
+                               WidthRequest="300"/>
+                    <Button x:Name="BookSearchbarButton"
+                            Text="+" 
+                            FontSize="24" 
+                            BackgroundColor="#0078D4" 
+                            TextColor="White" 
+                            WidthRequest="45" 
+                            HeightRequest="45" 
+                            CornerRadius="30" 
+                            Margin="5"
+                            Padding="1"
+                            Clicked="BookSearchBarButton_Clicked"/>
+                </FlexLayout>
 
-        <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20" />
+                <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20" />
 
-        <!-- Book List Labels -->
-        <Grid Padding="10" RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="*, *, *, *">
-            <Label Text="Book Title" 
-                   FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
-                   Grid.Row="0" 
-                   Grid.Column="0" 
-                   Margin="10,0" 
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center" />
-            <Label Text="Book Author" 
-                   FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
-                   Grid.Row="0" 
-                   Grid.Column="1" 
-                   Margin="10,0" 
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center" />
-            <Label Text="Book Genre" 
-                   FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
-                   Grid.Row="0" 
-                   Grid.Column="2" 
-                   Margin="10,0" 
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center" />
-            <Label Text="Book ISBN" 
-                   FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
-                   Grid.Row="0" 
-                   Grid.Column="3" 
-                   Margin="10,0" 
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center" />
-        </Grid>
+                <!-- Book List Labels -->
+                <Grid Padding="10" RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="*, *, *, *">
+                    <Label Text="Book Title" 
+                           FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
+                           Grid.Row="0" 
+                           Grid.Column="0" 
+                           Margin="10,0" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center" />
+                    <Label Text="Book Author" 
+                           FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
+                           Grid.Row="0" 
+                           Grid.Column="1" 
+                           Margin="10,0" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center" />
+                    <Label Text="Book Genre" 
+                           FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
+                           Grid.Row="0" 
+                           Grid.Column="2" 
+                           Margin="10,0" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center" />
+                    <Label Text="Book ISBN" 
+                           FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
+                           Grid.Row="0" 
+                           Grid.Column="3" 
+                           Margin="10,0" 
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center" />
+                </Grid>
 
-        <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20" />
+                <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20" />
 
-        <!-- Books Display -->
-        <CollectionView ItemsSource="{Binding Books}" HorizontalOptions="Center" VerticalOptions="Center">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <!-- Books Display -->
+                <CollectionView ItemsSource="{Binding Books}" HorizontalOptions="Center" VerticalOptions="Center">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                        <Label Text="{Binding Title}" 
-                               BackgroundColor="Transparent" 
-                               TextColor="White" 
-                               Padding="10" 
-                               FontSize="24" 
-                               Grid.Column="0" />
+                                <Label Text="{Binding Title}" 
+                                       BackgroundColor="Transparent" 
+                                       TextColor="White" 
+                                       Padding="10" 
+                                       FontSize="24" 
+                                       Grid.Column="0" />
 
-                        <Button Text="X" 
-                                BackgroundColor="Transparent" 
-                                TextColor="White" 
-                                BorderColor="White" 
-                                BorderWidth="2" 
-                                HorizontalOptions="Center" 
-                                VerticalOptions="Center"
-                                Clicked="DeleteBookBtn_Clicked" 
-                                Grid.Column="1" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <Button Text="X" 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="White" 
+                                        BorderColor="White" 
+                                        BorderWidth="2" 
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Center"
+                                        Clicked="DeleteBookBtn_Clicked" 
+                                        Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
+            </VerticalStackLayout>
+        </ScrollView>
+        
         <!-- Semi-transparent Background -->
         <BoxView x:Name="ConfirmMenuBackground" 
                  Color="Black" 
                  Opacity="0.5" 
-                 IsVisible="False" 
+                 IsVisible="False"
                  HorizontalOptions="FillAndExpand" 
-                 VerticalOptions="FillAndExpand" />
+                 VerticalOptions="FillAndExpand"/>
 
         <!-- Overlayed FlexLayout (pop-up menu) -->
         <Border IsVisible="False" 
@@ -125,7 +130,7 @@
                 <BoxView Color="#2b2924" 
                          CornerRadius="20" 
                          HorizontalOptions="FillAndExpand" 
-                         VerticalOptions="FillAndExpand" />
+                         VerticalOptions="FillAndExpand"/>
 
                 <FlexLayout Direction="Row" 
                             HorizontalOptions="Center" 
@@ -133,7 +138,7 @@
                             AlignItems="Center" 
                             Padding="10">
 
-                    <Label Text="{Binding Title, StringFormat='Delete {0}?'}" 
+                    <Label x:Name="ConfirmDeleteLabel" 
                            FontSize="20" 
                            TextColor="White" 
                            HorizontalOptions="Center" 
@@ -152,7 +157,7 @@
                             HeightRequest="30"
                             Clicked="ConfirmDeleteBtn_Clicked"/>
                     
-                    <Button x:Name="DontDeleteBtn" 
+                    <Button x:Name="DeclineDeleteBtn" 
                             Text="No" 
                             FontSize="16" 
                             BackgroundColor="Transparent" 
@@ -163,11 +168,11 @@
                             Padding="5" 
                             WidthRequest="50" 
                             HeightRequest="30"
-                            Clicked="DontDeleteBtn_Clicked"/>
+                            Clicked="DeclineDeleteBtn_Clicked"/>
                 </FlexLayout>
             </Grid>
         </Border>
 
-    </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>
