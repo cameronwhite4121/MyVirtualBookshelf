@@ -52,7 +52,7 @@ public partial class ShelfPage : ContentPage
     {
         if (!string.IsNullOrEmpty(BookSearchbar.Text)) 
         { 
-            _db.AddBookToShelf(ShelfId, BookSearchbar.Text);
+            _db.AddBook(ShelfId, BookSearchbar.Text);
             BookSearchbar.Text = null;
             PopulateShelf();
         }
