@@ -44,7 +44,8 @@ public partial class BookshelfPage : ContentPage
         if (clickedButton != null)
         {
             Shelf selectedShelf = clickedButton.BindingContext as Shelf;
-            await Navigation.PushAsync(new ShelfPage(selectedShelf.Id));
+            ShelfPage shelfPage = new ShelfPage(selectedShelf.Id, this);
+            await Navigation.PushAsync(shelfPage);
         }
     }
 }

@@ -120,6 +120,15 @@ namespace MyVirtualBookshelf.Models
             return _db.Table<Bookshelf>().ToList();
         }
 
+        public Shelf GetShelf(int shelfId)
+        {
+            Shelf shelf = (from s in _db.Table<Shelf>()
+                                   where s.Id == shelfId
+                                   select s).FirstOrDefault();
+
+            return shelf;
+        }
+
         public void AddBook(int shelfId, string bookTitle)
         {
             Book bookToAdd = new Book(shelfId, bookTitle);
