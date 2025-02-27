@@ -24,6 +24,12 @@
                                 Clicked="OpenShelfBtn_Clicked" 
                                 Grid.Column="0" />
 
+                        <Label Text="{Binding BookCount, StringFormat='{0} Books'}"
+                               TextColor="White" 
+                               FontSize="18" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center" 
+                               Grid.Column="1" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
