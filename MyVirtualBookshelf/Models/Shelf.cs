@@ -29,6 +29,12 @@ namespace MyVirtualBookshelf.Models
         public int BookshelfId { get; set; }
 
         /// <summary>
+        /// Total amount of books in the shelf
+        /// </summary>
+        [Column("BookCount")]
+        public int BookCount { get; set; }
+
+        /// <summary>
         /// Parameterless constructor
         /// </summary>
         public Shelf() {}
