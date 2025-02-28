@@ -7,7 +7,7 @@
     <VerticalStackLayout>
 
         <!-- Shelves Display -->
-        <CollectionView ItemsSource="{Binding Shelves}">
+        <CollectionView ItemsSource="{Binding Shelves}" Margin="50">
             
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"
@@ -19,14 +19,17 @@
                     <Border Stroke="White" 
                             StrokeThickness="2" 
                             BackgroundColor="Transparent" 
-                            Padding="5" 
-                            StrokeShape="RoundRectangle">
-                        
-                        <Grid HorizontalOptions="Start" VerticalOptions="Center" Margin="5">
+                            Padding="5">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20"/>
+                        </Border.StrokeShape>
+
+                        <Grid HorizontalOptions="Start" VerticalOptions="Center" Margin="5, 5" ColumnSpacing="10" RowSpacing="100">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="350" />
                             </Grid.ColumnDefinitions>
 
                             <Button Text="{Binding ShelfName}" 
@@ -48,6 +51,13 @@
                                    VerticalOptions="Center" 
                                    Grid.Column="2"
                                    Margin="20,5"/>
+
+                            <Label Text="{Binding ShelfContentsHint}"
+                                   TextColor="White" 
+                                   FontSize="18" 
+                                   VerticalOptions="Center" 
+                                   Grid.Column="3"
+                                   Margin="5"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
