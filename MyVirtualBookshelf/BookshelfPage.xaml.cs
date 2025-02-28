@@ -28,11 +28,13 @@ public partial class BookshelfPage : ContentPage
 
         List<Shelf> updatedShelves = _db.GetBookshelfContents(BookshelfId);
 
+        int i = 1;
         foreach (Shelf shelf in updatedShelves)
         {
+            shelf.ShelfName = "Shelf " + i.ToString();
             Shelves.Add(shelf);
+            i++;
         }
-
     }
 
     public async void OpenShelfBtn_Clicked(object sender, EventArgs e)

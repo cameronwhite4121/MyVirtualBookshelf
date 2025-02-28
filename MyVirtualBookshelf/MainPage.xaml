@@ -48,7 +48,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Button Text="{Binding Id, StringFormat='Bookshelf {0}'}" 
+                                <Button Text="{Binding BookshelfName}" 
                                         BackgroundColor="Transparent" 
                                         TextColor="White" 
                                         Padding="10" 
