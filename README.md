@@ -11,19 +11,21 @@ features in mind that I'm unsure will make it to the final cut including:
 - and more to come as development progresses
   
 ## Main Page
-![image](https://github.com/user-attachments/assets/d34afda7-1058-430a-8574-8d7d0d6adc51)
-- Shelves are displayed with a protion of the books in the shelf being shown
-- Options to add, delete or maybe even rename shelves are given
+![image](https://github.com/user-attachments/assets/e7957ae2-15fe-4122-952d-ab84b2189aa3)
+- Add bookshelf button creates new bookshelves with a max limit of 8 at a time   
+- Bookshelves are displayed and can be clicked into
+- Delete bookshelf button deletes the bookshelf's contents, then the bookshelf itself   
   
-## Flyout Nav bar
-![image](https://github.com/user-attachments/assets/d3c26432-087b-48f6-8497-82201cd54c04)
-- Nav menu that is added to the project by default but is helpful so it will be kept
-- Accessible via highlighted hamburger menu
-- Contains nav links that redirect to the main menu and the shelf content page
+## Shelf View
+![image](https://github.com/user-attachments/assets/ed852223-a3b0-40f8-8e15-862f92862505)
+- Each bookshelf gets 8 shelves on creation
+- The total number of books in each shelf is displayed
+- A preview of the shelve's contents is also displayed
+- Shelf is opened by clicking the shelf name
   
 ## Shelf Content View
-![image](https://github.com/user-attachments/assets/76e8f335-902a-45d8-9e00-91d93de0944e)
-- Each book in the specific shelf will be displayed here with some info about the book
+![image](https://github.com/user-attachments/assets/e47446b0-ce92-4bd7-b5b2-c63833f16d09)
+- Each book in the specific shelf is displayed here and its details will be displayed
 
 ## Documentation / Helpful Links
 [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet)   
