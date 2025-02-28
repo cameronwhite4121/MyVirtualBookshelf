@@ -23,6 +23,12 @@ namespace MyVirtualBookshelf.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Used for shelf display
+        /// </summary>
+        [Column("ShelfName")]
+        public int ShelfName { get; set; }
+
+        /// <summary>
         /// Reference to the bookshelf that this shelf is contained in
         /// </summary>
         [Column("BookshelfId")]
