@@ -29,6 +29,12 @@ namespace MyVirtualBookshelf.Models
         public string ShelfName { get; set; }
 
         /// <summary>
+        /// Meant to display a string that hints at the contents of the shelf.
+        /// </summary>
+        [Column("ShelfContentsHint")]
+        public string ShelfContentsHint { get; set; }
+
+        /// <summary>
         /// Reference to the bookshelf that this shelf is contained in
         /// </summary>
         [Column("BookshelfId")]
