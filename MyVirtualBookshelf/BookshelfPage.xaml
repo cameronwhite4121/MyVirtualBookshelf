@@ -7,30 +7,49 @@
     <VerticalStackLayout>
 
         <!-- Shelves Display -->
-        <CollectionView ItemsSource="{Binding Shelves}" HorizontalOptions="Center" VerticalOptions="Center">
+        <CollectionView ItemsSource="{Binding Shelves}">
+            
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                    <Border Stroke="White" 
+                            StrokeThickness="2" 
+                            BackgroundColor="Transparent" 
+                            Padding="5" 
+                            StrokeShape="RoundRectangle">
+                        
+                        <Grid HorizontalOptions="Start" VerticalOptions="Center" Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Button Text="{Binding Id, StringFormat='Shelf {0}'}" 
-                                BackgroundColor="Transparent" 
-                                TextColor="White" 
-                                Padding="10" 
-                                FontSize="24" 
-                                Clicked="OpenShelfBtn_Clicked" 
-                                Grid.Column="0" />
+                            <Button Text="{Binding ShelfName}" 
+                                    BackgroundColor="Transparent" 
+                                    TextColor="White"
+                                    FontSize="24" 
+                                    Clicked="OpenShelfBtn_Clicked" 
+                                    Grid.Column="0"/>
 
-                        <Label Text="{Binding BookCount, StringFormat='{0} Books'}"
-                               TextColor="White" 
-                               FontSize="18" 
-                               VerticalOptions="Center" 
-                               HorizontalOptions="Center" 
-                               Grid.Column="1" />
-                    </Grid>
+                            <Label Text="{Binding BookCount, StringFormat='{0} Books'}"
+                                   TextColor="White" 
+                                   FontSize="18" 
+                                   VerticalOptions="Center" 
+                                   Grid.Column="1"/>
+
+                            <Label Text="|"
+                                   TextColor="White" 
+                                   FontSize="30" 
+                                   VerticalOptions="Center" 
+                                   Grid.Column="2"
+                                   Margin="20,5"/>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
