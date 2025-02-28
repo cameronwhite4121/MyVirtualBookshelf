@@ -109,8 +109,8 @@ namespace MyVirtualBookshelf.Models
         public List<Book> GetShelfContents(int shelfId)
         {
             List<Book> shelfContents = (from b in _db.Table<Book>()
-                                           where b.ShelfId == shelfId
-                                           select b).ToList();
+                                        where b.ShelfId == shelfId
+                                        select b).ToList();
 
             return shelfContents;
         }
@@ -120,10 +120,20 @@ namespace MyVirtualBookshelf.Models
             return _db.Table<Bookshelf>().ToList();
         }
 
-        public void AddBookToShelf(int shelfId, string bookTitle)
+        public Shelf GetShelf(int shelfId)
+        {
+            Shelf shelf = (from s in _db.Table<Shelf>()
+                                   where s.Id == shelfId
+                                   select s).FirstOrDefault();
+
+            return shelf;
+        }
+
+        public void AddBook(int shelfId, string bookTitle)
         {
             Book bookToAdd = new Book(shelfId, bookTitle);
             _db.Insert(bookToAdd);
+            IncrementBookCount(shelfId);
         }
 
         public void DeleteBook(int shelfId, int bookId)
@@ -137,7 +147,28 @@ namespace MyVirtualBookshelf.Models
             if (bookToDelete != null)
             {
                 _db.Delete(bookToDelete);
+                DecrementBookCount(shelfId);
             }
+        }
+
+        public void IncrementBookCount(int shelfId)
+        {
+            Shelf shelfToUpdate = (from s in _db.Table<Shelf>()
+                                   where s.Id == shelfId
+                                   select s).FirstOrDefault();
+
+            shelfToUpdate.BookCount++;
+            _db.Update(shelfToUpdate);
+        }
+
+        public void DecrementBookCount(int shelfId)
+        {
+            Shelf shelfToUpdate = (from s in _db.Table<Shelf>()
+                                   where s.Id == shelfId
+                                   select s).FirstOrDefault();
+
+            shelfToUpdate.BookCount--;
+            _db.Update(shelfToUpdate);
         }
     }
 }

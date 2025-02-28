@@ -82,9 +82,12 @@ namespace MyVirtualBookshelf
 
             List<Bookshelf> updatedBookshelves = _db.GetAllBookshelves();
 
+            int i = 1;
             foreach (Bookshelf bookshelf in updatedBookshelves)
             {
+                bookshelf.BookshelfName = "Bookshelf " + i.ToString();
                 Bookshelves.Add(bookshelf);
+                i++;
             }
 
             // Update BookshelfCount.Text

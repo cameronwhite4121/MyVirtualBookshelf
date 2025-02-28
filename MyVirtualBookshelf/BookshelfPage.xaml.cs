@@ -1,5 +1,6 @@
 using MyVirtualBookshelf.Models;
 using System.Collections.ObjectModel;
+using System.Globalization;
 namespace MyVirtualBookshelf;
 #nullable disable
 
@@ -27,12 +28,54 @@ public partial class BookshelfPage : ContentPage
         Shelves.Clear();
 
         List<Shelf> updatedShelves = _db.GetBookshelfContents(BookshelfId);
-
+        
+        int i = 1;
         foreach (Shelf shelf in updatedShelves)
         {
-            Shelves.Add(shelf);
-        }
+            // Create shelf name
+            shelf.ShelfName = "Shelf " + i.ToString();
 
+            DisplayShelfHint(shelf);
+
+            Shelves.Add(shelf);
+            i++;
+        }
+    }
+
+    /// <summary>
+    /// This method grabs all the books in a shelf, if any, and
+    /// creates a string that is used to display a hint at what
+    /// is in the shelf.
+    /// </summary>
+    /// <param name="shelf"></param>
+    public void DisplayShelfHint(Shelf shelf)
+    {       
+        List<Book> allBooks = _db.GetShelfContents(shelf.Id);
+
+        // Avoid null-reference exception by checking ahead
+        if (allBooks.Count == 0)
+        {
+            shelf.ShelfContentsHint = "This shelf is empty";
+        }
+        else
+        {
+            // Create a string using fencepost method           
+            for (int i = 0; i < allBooks.Count && i < 3; i++)
+            {
+                if (allBooks.Count == 1)
+                {
+                    shelf.ShelfContentsHint += allBooks[i].Title;
+                }
+                if (i == 2)
+                {
+                    shelf.ShelfContentsHint += allBooks[i].Title;
+                }
+                else
+                {
+                    shelf.ShelfContentsHint += allBooks[i].Title + ", ";
+                }                
+            }
+        }       
     }
 
     public async void OpenShelfBtn_Clicked(object sender, EventArgs e)
@@ -44,7 +87,8 @@ public partial class BookshelfPage : ContentPage
         if (clickedButton != null)
         {
             Shelf selectedShelf = clickedButton.BindingContext as Shelf;
-            await Navigation.PushAsync(new ShelfPage(selectedShelf.Id));
+            ShelfPage shelfPage = new ShelfPage(selectedShelf.Id, this);
+            await Navigation.PushAsync(shelfPage);
         }
     }
 }

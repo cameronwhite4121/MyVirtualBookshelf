@@ -12,11 +12,13 @@ public partial class ShelfPage : ContentPage
     public int BookId { get; set; }
     public int ShelfId { get; set; }
     public string BookTitle { get; set; }
+    public BookshelfPage BookshelfPageToUpdate { get; set; }
 
-    public ShelfPage(int sid)
+    public ShelfPage(int sid, BookshelfPage bookshelfPage)
 	{
         InitializeComponent();
         this.ShelfId = sid;
+        BookshelfPageToUpdate = bookshelfPage;
 
         // Displays list of books on the page 
         _db = new DatabaseHandler();
@@ -52,9 +54,10 @@ public partial class ShelfPage : ContentPage
     {
         if (!string.IsNullOrEmpty(BookSearchbar.Text)) 
         { 
-            _db.AddBookToShelf(ShelfId, BookSearchbar.Text);
+            _db.AddBook(ShelfId, BookSearchbar.Text);
             BookSearchbar.Text = null;
             PopulateShelf();
+            BookshelfPageToUpdate.PopulateBookshelf();
         }
     }
 
@@ -84,6 +87,7 @@ public partial class ShelfPage : ContentPage
 
         _db.DeleteBook(ShelfId, BookId);
         PopulateShelf();
+        BookshelfPageToUpdate.PopulateBookshelf();
     }
 
     public void DeclineDeleteBtn_Clicked(object sender, EventArgs e)

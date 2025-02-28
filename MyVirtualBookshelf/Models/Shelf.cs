@@ -23,10 +23,28 @@ namespace MyVirtualBookshelf.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Used for shelf display
+        /// </summary>
+        [Column("ShelfName")]
+        public string ShelfName { get; set; }
+
+        /// <summary>
+        /// Meant to display a string that hints at the contents of the shelf.
+        /// </summary>
+        [Column("ShelfContentsHint")]
+        public string ShelfContentsHint { get; set; }
+
+        /// <summary>
         /// Reference to the bookshelf that this shelf is contained in
         /// </summary>
         [Column("BookshelfId")]
         public int BookshelfId { get; set; }
+
+        /// <summary>
+        /// Total amount of books in the shelf
+        /// </summary>
+        [Column("BookCount")]
+        public int BookCount { get; set; }
 
         /// <summary>
         /// Parameterless constructor
