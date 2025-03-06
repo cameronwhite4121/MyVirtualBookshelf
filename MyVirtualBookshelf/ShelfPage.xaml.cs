@@ -90,6 +90,7 @@ public partial class ShelfPage : ContentPage
             ConfirmDeleteLabel.Text = $"Delete \"{BookTitle}\" ?";
 
             ConfirmMenuBackground.IsVisible = true;
+            ConfirmMenuBackground.Opacity = 0.3;
             ConfirmMenu.IsVisible = true;
         }
     }
