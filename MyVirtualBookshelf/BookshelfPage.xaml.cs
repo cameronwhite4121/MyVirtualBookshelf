@@ -62,18 +62,15 @@ public partial class BookshelfPage : ContentPage
             // Create a string using fencepost method           
             for (int i = 0; i < allBooks.Count && i < 3; i++)
             {
-                if (allBooks.Count == 1)
-                {
-                    shelf.ShelfContentsHint += allBooks[i].Title;
-                }
-                if (i == 2)
+                // Add the title to ShelfContentsHint
+                if (i == 0)
                 {
                     shelf.ShelfContentsHint += allBooks[i].Title;
                 }
                 else
                 {
-                    shelf.ShelfContentsHint += allBooks[i].Title + ", ";
-                }                
+                    shelf.ShelfContentsHint += ", " + allBooks[i].Title;
+                }
             }
         }       
     }

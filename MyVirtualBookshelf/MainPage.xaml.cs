@@ -45,6 +45,7 @@ namespace MyVirtualBookshelf
 
                 ConfirmMenu.IsVisible = true;
                 ConfirmMenuBackground.IsVisible = true;
+                ConfirmMenuBackground.Opacity = 0.5;
             }
         }
 

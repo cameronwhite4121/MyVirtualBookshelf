@@ -4,65 +4,61 @@
              x:Class="MyVirtualBookshelf.BookshelfPage"
              Title="Shelves">
 
-    <VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
 
-        <!-- Shelves Display -->
-        <CollectionView ItemsSource="{Binding Shelves}" Margin="50">
-            
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                                   ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Stroke="White" 
-                            StrokeThickness="2" 
-                            BackgroundColor="Transparent" 
-                            Padding="5">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20"/>
-                        </Border.StrokeShape>
+            <!-- Shelves Display -->
+            <CollectionView ItemsSource="{Binding Shelves}" Margin="0">
 
-                        <Grid HorizontalOptions="Start" VerticalOptions="Center" Margin="5, 5" ColumnSpacing="10" RowSpacing="100">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="350" />
-                            </Grid.ColumnDefinitions>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
 
-                            <Button Text="{Binding ShelfName}" 
-                                    BackgroundColor="Transparent" 
-                                    TextColor="White"
-                                    FontSize="24" 
-                                    Clicked="OpenShelfBtn_Clicked" 
-                                    Grid.Column="0"/>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="White" 
+                                StrokeThickness="2" 
+                                BackgroundColor="Transparent" 
+                                Padding="5"
+                                MaximumHeightRequest="100"
+                                MaximumWidthRequest="900"
+                                MinimumWidthRequest="100">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20"/>
+                            </Border.StrokeShape>
 
-                            <Label Text="{Binding BookCount, StringFormat='{0} Books'}"
-                                   TextColor="White" 
-                                   FontSize="18" 
-                                   VerticalOptions="Center" 
-                                   Grid.Column="1"/>
+                            <Grid Margin="5" ColumnSpacing="{OnIdiom Phone=5, Tablet=17, Desktop=50}" RowSpacing="50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <Label Text="|"
-                                   TextColor="White" 
-                                   FontSize="30" 
-                                   VerticalOptions="Center" 
-                                   Grid.Column="2"
-                                   Margin="20,5"/>
+                                <Button Text="{Binding ShelfName}" 
+                                        BackgroundColor="Transparent" 
+                                        TextColor="White"
+                                        FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=30}" 
+                                        Clicked="OpenShelfBtn_Clicked" 
+                                        Grid.Column="0"/>
 
-                            <Label Text="{Binding ShelfContentsHint}"
-                                   TextColor="White" 
-                                   FontSize="18" 
-                                   VerticalOptions="Center" 
-                                   Grid.Column="3"
-                                   Margin="5"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <Label Text="{Binding BookCount, StringFormat='|    {0} Books    |'}"
+                                       TextColor="White" 
+                                       FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=20}" 
+                                       VerticalOptions="Center" 
+                                       Grid.Column="1"/>
 
-    </VerticalStackLayout>
+                                <Label Text="{Binding ShelfContentsHint}"
+                                       TextColor="White" 
+                                       FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=20}" 
+                                       VerticalOptions="Center"
+                                       Grid.Column="2"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
 </ContentPage>

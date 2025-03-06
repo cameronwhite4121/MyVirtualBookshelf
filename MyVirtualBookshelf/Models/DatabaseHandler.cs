@@ -129,9 +129,9 @@ namespace MyVirtualBookshelf.Models
             return shelf;
         }
 
-        public void AddBook(int shelfId, string bookTitle)
+        public void AddBook(int shelfId, Book bookToAdd)
         {
-            Book bookToAdd = new Book(shelfId, bookTitle);
+            bookToAdd.ShelfId = shelfId;
             _db.Insert(bookToAdd);
             IncrementBookCount(shelfId);
         }

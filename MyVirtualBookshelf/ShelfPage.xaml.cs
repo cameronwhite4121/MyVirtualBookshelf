@@ -7,6 +7,7 @@ public partial class ShelfPage : ContentPage
 {
     
     private DatabaseHandler _db;
+    private BookService _bookService;
     public ObservableCollection<Book> Books { get; set; }
     public string SearchedBook {  get; set; }
     public int BookId { get; set; }
@@ -19,6 +20,9 @@ public partial class ShelfPage : ContentPage
         InitializeComponent();
         this.ShelfId = sid;
         BookshelfPageToUpdate = bookshelfPage;
+
+        // Google books service
+        _bookService = new BookService();
 
         // Displays list of books on the page 
         _db = new DatabaseHandler();
@@ -50,14 +54,24 @@ public partial class ShelfPage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    public void BookSearchBarButton_Clicked(object sender, EventArgs e)
+    public async void BookSearchBarButton_Clicked(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(BookSearchbar.Text)) 
-        { 
-            _db.AddBook(ShelfId, BookSearchbar.Text);
-            BookSearchbar.Text = null;
-            PopulateShelf();
-            BookshelfPageToUpdate.PopulateBookshelf();
+        if (!string.IsNullOrEmpty(BookSearchbar.Text))
+        {
+            // Call the Google Books API service here
+            string searchQuery = BookSearchbar.Text;
+            List<Book> searchResults = await _bookService.SearchGoogleBooksAsync(searchQuery);
+
+            // Add the first result from the Google Books query to the db and perform
+            // necessary updates.
+            if (searchResults.Count > 0)
+            {
+                Book bookToAdd = searchResults[0];
+                _db.AddBook(ShelfId, bookToAdd);
+                BookSearchbar.Text = null;
+                PopulateShelf();
+                BookshelfPageToUpdate.PopulateBookshelf();
+            }
         }
     }
 
@@ -76,6 +90,7 @@ public partial class ShelfPage : ContentPage
             ConfirmDeleteLabel.Text = $"Delete \"{BookTitle}\" ?";
 
             ConfirmMenuBackground.IsVisible = true;
+            ConfirmMenuBackground.Opacity = 0.3;
             ConfirmMenu.IsVisible = true;
         }
     }

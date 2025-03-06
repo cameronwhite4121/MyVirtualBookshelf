@@ -39,30 +39,34 @@
                 <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20" />
 
                 <!-- Book List Labels -->
-                <Grid Padding="10" RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="*, *, *, *">
+                <Grid Padding="10" 
+                      RowDefinitions="Auto, Auto, Auto, Auto" 
+                      ColumnDefinitions="auto, auto, auto, auto" 
+                      HorizontalOptions="Center"
+                      ColumnSpacing="{OnIdiom Phone=0, Tablet=17, Desktop=50}">
                     <Label Text="Book Title" 
-                           FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
+                           FontSize="{OnIdiom Phone=14, Tablet=17, Desktop=19}" 
                            Grid.Row="0" 
                            Grid.Column="0" 
                            Margin="10,0" 
                            HorizontalTextAlignment="Center" 
                            VerticalTextAlignment="Center" />
                     <Label Text="Book Author" 
-                           FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
+                           FontSize="{OnIdiom Phone=14, Tablet=17, Desktop=19}" 
                            Grid.Row="0" 
                            Grid.Column="1" 
                            Margin="10,0" 
                            HorizontalTextAlignment="Center" 
                            VerticalTextAlignment="Center" />
                     <Label Text="Book Genre" 
-                           FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
+                           FontSize="{OnIdiom Phone=14, Tablet=17, Desktop=19}" 
                            Grid.Row="0" 
                            Grid.Column="2" 
                            Margin="10,0" 
                            HorizontalTextAlignment="Center" 
                            VerticalTextAlignment="Center" />
                     <Label Text="Book ISBN" 
-                           FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=19}" 
+                           FontSize="{OnIdiom Phone=14, Tablet=17, Desktop=19}" 
                            Grid.Row="0" 
                            Grid.Column="3" 
                            Margin="10,0" 
@@ -73,43 +77,77 @@
                 <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20" />
 
                 <!-- Books Display -->
-                <CollectionView ItemsSource="{Binding Books}" HorizontalOptions="Center" VerticalOptions="Center">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <Label Text="{Binding Title}" 
-                                       BackgroundColor="Transparent" 
-                                       TextColor="White" 
-                                       Padding="10" 
-                                       FontSize="24" 
-                                       Grid.Column="0" />
-
-                                <Button Text="X" 
-                                        BackgroundColor="Transparent" 
-                                        TextColor="White" 
-                                        BorderColor="White" 
-                                        BorderWidth="2" 
+                <ScrollView Orientation="Horizontal" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center">
+                    <StackLayout Orientation="Horizontal">
+                        <CollectionView ItemsSource="{Binding Books}" 
                                         HorizontalOptions="Center" 
-                                        VerticalOptions="Center"
-                                        Clicked="DeleteBookBtn_Clicked" 
-                                        Grid.Column="1" />
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                        VerticalOptions="Center">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalOptions="Center" 
+                                          VerticalOptions="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="{Binding Title, StringFormat='- {0}'}" 
+                                               BackgroundColor="Transparent" 
+                                               TextColor="White" 
+                                               Padding="10" 
+                                               FontSize="{OnIdiom Phone=13, Tablet=17, Desktop=25}" 
+                                               Grid.Column="0" />
+
+                                        <Label Text="{Binding Author}" 
+                                               BackgroundColor="Transparent" 
+                                               TextColor="White" 
+                                               Padding="10" 
+                                               FontSize="{OnIdiom Phone=13, Tablet=17, Desktop=20}" 
+                                               Grid.Column="1" />
+
+                                        <Label Text="{Binding Genre}" 
+                                               BackgroundColor="Transparent" 
+                                               TextColor="White" 
+                                               Padding="10" 
+                                               FontSize="{OnIdiom Phone=13, Tablet=17, Desktop=20}" 
+                                               Grid.Column="2" />
+
+                                        <Label Text="{Binding Isbn}" 
+                                               BackgroundColor="Transparent" 
+                                               TextColor="White" 
+                                               Padding="10" 
+                                               FontSize="{OnIdiom Phone=13, Tablet=17, Desktop=20}" 
+                                               Grid.Column="3" />
+
+                                        <Button Text="X" 
+                                                BackgroundColor="Transparent" 
+                                                TextColor="White"
+                                                BorderColor="White" 
+                                                BorderWidth="2"                                        
+                                                HorizontalOptions="Center" 
+                                                VerticalOptions="Center"
+                                                WidthRequest="1"
+                                                HeightRequest="1"
+                                                Clicked="DeleteBookBtn_Clicked" 
+                                                Grid.Column="4" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
 
             </VerticalStackLayout>
         </ScrollView>
         
         <!-- Semi-transparent Background -->
         <BoxView x:Name="ConfirmMenuBackground" 
-                 Color="Black" 
-                 Opacity="0.5" 
+                 Color="Black"
                  IsVisible="False"
                  HorizontalOptions="FillAndExpand" 
                  VerticalOptions="FillAndExpand"/>
@@ -127,6 +165,12 @@
                 StrokeShape="RoundRectangle 20">
 
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                
                 <BoxView Color="#2b2924" 
                          CornerRadius="20" 
                          HorizontalOptions="FillAndExpand" 
@@ -136,10 +180,10 @@
                             HorizontalOptions="Center" 
                             VerticalOptions="Center" 
                             AlignItems="Center" 
-                            Padding="10">
+                            Padding="1">
 
                     <Label x:Name="ConfirmDeleteLabel" 
-                           FontSize="20" 
+                           FontSize="{OnIdiom Phone=13, Tablet=17, Desktop=15}" 
                            TextColor="White" 
                            HorizontalOptions="Center" 
                            VerticalOptions="Center"/>
@@ -156,8 +200,8 @@
                             WidthRequest="50" 
                             HeightRequest="30"
                             Clicked="ConfirmDeleteBtn_Clicked"/>
-                    
-                    <Button x:Name="DeclineDeleteBtn" 
+
+                    <Button x:Name="DontDeleteBtn" 
                             Text="No" 
                             FontSize="16" 
                             BackgroundColor="Transparent" 
