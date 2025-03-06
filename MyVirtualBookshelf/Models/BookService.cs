@@ -17,10 +17,10 @@ namespace MyVirtualBookshelf.Models
         // Constructor to initialize Google Books API client
         public BookService()
         {
-            string apiKey = GetApiKeyFromAppSettings();
+            // Initialize the BooksService with the retrieved API key
             _booksService = new BooksService(new BaseClientService.Initializer
             {
-                ApiKey = apiKey,
+                ApiKey = "AIzaSyAqbg1glYeFYGA4vkU6wMYWut21f3bFSFc",
                 ApplicationName = "MyVirtualBookshelf"
             });
         }
@@ -84,31 +84,5 @@ namespace MyVirtualBookshelf.Models
             return null;  // Return null if no ISBN_13 is found
         }
 
-        /// <summary>
-        /// Returns the apikey from appsettings in the form of a string.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="FileNotFoundException"></exception>
-        private string GetApiKeyFromAppSettings()
-        {
-            // Get the file path for appsettings.json in the output directory
-            var filePath = Path.Combine(Environment.CurrentDirectory, "appsettings.json");
-
-            // Ensure the appsettings.json file exists
-            if (File.Exists(filePath))
-            {
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Environment.CurrentDirectory)  // Set the base path to the current directory (where the app runs)
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .Build();
-
-                // Retrieve the API key from the configuration
-                return configuration["GoogleBooksApi:ApiKey"];
-            }
-            else
-            {
-                throw new FileNotFoundException($"appsettings.json not found at {filePath}");
-            }
-        }
     }
 }
