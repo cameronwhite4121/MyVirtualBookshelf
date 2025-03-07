@@ -7,7 +7,15 @@ namespace MyVirtualBookshelf;
 public partial class BookshelfPage : ContentPage
 {
     private DatabaseHandler _db;
+
+    /// <summary>
+    /// The shelves in the current bookshelf.
+    /// </summary>
     public ObservableCollection<Shelf> Shelves { get; set; }
+
+    /// <summary>
+    /// The Id of the current bookshelf.
+    /// </summary>
     int BookshelfId { get; set; }
     
     public BookshelfPage(int bookshelfId)
@@ -23,6 +31,9 @@ public partial class BookshelfPage : ContentPage
         this.BindingContext = this;
     }
 
+    /// <summary>
+    /// Updates the shelves display.
+    /// </summary>
     public void PopulateBookshelf()
     {
         Shelves.Clear();
@@ -75,6 +86,11 @@ public partial class BookshelfPage : ContentPage
         }       
     }
 
+    /// <summary>
+    /// Opens the specified shelf.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public async void OpenShelfBtn_Clicked(object sender, EventArgs e)
     {
         // Ensure the sender is a Button

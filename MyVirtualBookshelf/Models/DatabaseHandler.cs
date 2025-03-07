@@ -36,6 +36,9 @@ namespace MyVirtualBookshelf.Models
             }
         }
 
+        /// <summary>
+        /// Creates a bookshelf and 8 shelves that are associated with that bookshelf.
+        /// </summary>
         public void CreateBookshelf()
         {
             if (GetAllBookshelves().Count < 8) // Only allow 8 shelves at once
@@ -58,6 +61,11 @@ namespace MyVirtualBookshelf.Models
             }
         }
 
+        /// <summary>
+        /// Deletes the bookshelf, starting with its contents to remove any
+        /// associations.
+        /// </summary>
+        /// <param name="bookshelfId"></param>
         public void DeleteBookshelf(int bookshelfId)
         {        
             // Use query syntax to find the shelf to delete by its Id
@@ -97,6 +105,11 @@ namespace MyVirtualBookshelf.Models
             }
         }
 
+        /// <summary>
+        /// Grabs a bookshelves shelves by the bookshelfid
+        /// </summary>
+        /// <param name="bookshelfId"></param>
+        /// <returns></returns>
         public List<Shelf> GetBookshelfContents(int bookshelfId)
         {
             List<Shelf> shelves = (from s in _db.Table<Shelf>()
@@ -106,6 +119,11 @@ namespace MyVirtualBookshelf.Models
             return shelves;
         }
 
+        /// <summary>
+        /// Grabs every book in a specific shelf by the shelfid
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <returns></returns>
         public List<Book> GetShelfContents(int shelfId)
         {
             List<Book> shelfContents = (from b in _db.Table<Book>()
@@ -115,11 +133,20 @@ namespace MyVirtualBookshelf.Models
             return shelfContents;
         }
 
+        /// <summary>
+        /// Returns every bookshelf in the db
+        /// </summary>
+        /// <returns></returns>
         public List<Bookshelf> GetAllBookshelves()
         {
             return _db.Table<Bookshelf>().ToList();
         }
 
+        /// <summary>
+        /// returns a specific shelf by its shelfid
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <returns></returns>
         public Shelf GetShelf(int shelfId)
         {
             Shelf shelf = (from s in _db.Table<Shelf>()
@@ -129,6 +156,11 @@ namespace MyVirtualBookshelf.Models
             return shelf;
         }
 
+        /// <summary>
+        /// Adds a book to a shelf with the shelfid and a book object
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <param name="bookToAdd"></param>
         public void AddBook(int shelfId, Book bookToAdd)
         {
             bookToAdd.ShelfId = shelfId;
@@ -136,6 +168,11 @@ namespace MyVirtualBookshelf.Models
             IncrementBookCount(shelfId);
         }
 
+        /// <summary>
+        /// Deletes a book from a shelf with the shelfid and bookid
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <param name="bookId"></param>
         public void DeleteBook(int shelfId, int bookId)
         {
             // Use query syntax to find the book to delete by its Id and the Shelf Id
@@ -151,6 +188,11 @@ namespace MyVirtualBookshelf.Models
             }
         }
 
+        /// <summary>
+        /// Increments a shelf's BookCount property. Used to keep track 
+        /// of the number of books in a shelf.
+        /// </summary>
+        /// <param name="shelfId"></param>
         public void IncrementBookCount(int shelfId)
         {
             Shelf shelfToUpdate = (from s in _db.Table<Shelf>()
@@ -161,6 +203,11 @@ namespace MyVirtualBookshelf.Models
             _db.Update(shelfToUpdate);
         }
 
+        /// <summary>
+        /// Decrements a shelf's BookCount property. Used to keep track 
+        /// of the number of books in a shelf.
+        /// </summary>
+        /// <param name="shelfId"></param>
         public void DecrementBookCount(int shelfId)
         {
             Shelf shelfToUpdate = (from s in _db.Table<Shelf>()

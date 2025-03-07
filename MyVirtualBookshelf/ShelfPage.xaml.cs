@@ -7,12 +7,36 @@ public partial class ShelfPage : ContentPage
 {
     
     private DatabaseHandler _db;
+
+    /// <summary>
+    /// Google books service
+    /// </summary>
     private BookService _bookService;
+    
+    /// <summary>
+    /// The books in this shelf.
+    /// </summary>
     public ObservableCollection<Book> Books { get; set; }
-    public string SearchedBook {  get; set; }
+
+    /// <summary>
+    /// Storage for when needing to delete a book.
+    /// </summary>
     public int BookId { get; set; }
+
+    /// <summary>
+    /// Needed for when adding and deleting books from this shelf.
+    /// </summary>
     public int ShelfId { get; set; }
+
+    /// <summary>
+    /// Required for the delete menu
+    /// </summary>
     public string BookTitle { get; set; }
+
+    /// <summary>
+    /// Reference to the bookshelf that this shelf resides in.
+    /// Required for updating BookCount property.
+    /// </summary>
     public BookshelfPage BookshelfPageToUpdate { get; set; }
 
     public ShelfPage(int sid, BookshelfPage bookshelfPage)
@@ -75,6 +99,11 @@ public partial class ShelfPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Opens the delete menu and stores the specified book's title and id.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void DeleteBookBtn_Clicked(object sender, EventArgs e)
     {
         if (!ConfirmMenu.IsVisible)
@@ -95,6 +124,11 @@ public partial class ShelfPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Deletes the specified book and hides the delete menu.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void ConfirmDeleteBtn_Clicked(object sender, EventArgs e)
     {
         ConfirmMenu.IsVisible = false;
@@ -105,6 +139,11 @@ public partial class ShelfPage : ContentPage
         BookshelfPageToUpdate.PopulateBookshelf();
     }
 
+    /// <summary>
+    /// Hides the delete menu.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void DeclineDeleteBtn_Clicked(object sender, EventArgs e)
     {
         ConfirmMenu.IsVisible = false;

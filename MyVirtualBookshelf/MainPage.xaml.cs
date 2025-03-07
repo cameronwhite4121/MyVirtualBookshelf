@@ -8,8 +8,14 @@ namespace MyVirtualBookshelf
     {
         private DatabaseHandler _db;
 
+        /// <summary>
+        /// The bookshelves in the db
+        /// </summary>
         public ObservableCollection<Bookshelf> Bookshelves { get; set; }
 
+        /// <summary>
+        /// Used to store a bookshelf's id when deleting bookshelves.
+        /// </summary>
         int BookshelfId {  get; set; }
 
         public MainPage()
@@ -23,6 +29,11 @@ namespace MyVirtualBookshelf
             BindingContext = this;
         }
 
+        /// <summary>
+        /// Add a bookshelf to the db and resets the bookshelf display.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void CreateBookshelfBtn_Clicked(object sender, EventArgs e)
         {
             if(!ConfirmMenu.IsVisible)
@@ -32,6 +43,11 @@ namespace MyVirtualBookshelf
             } 
         }
 
+        /// <summary>
+        /// Opens the delete menu and stores the selected bookshelf's id.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void DeleteBookshelfBtn_Clicked(object sender, EventArgs e)
         {
             if (!ConfirmMenu.IsVisible)
@@ -49,6 +65,12 @@ namespace MyVirtualBookshelf
             }
         }
 
+        /// <summary>
+        /// Hides the delete menu, then deletes the bookshelf from the db and
+        /// updates the shelf.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ConfirmDeleteBtn_Clicked(object sender, EventArgs e) 
         {
             ConfirmMenu.IsVisible = false;
@@ -58,12 +80,22 @@ namespace MyVirtualBookshelf
             PopulateBookshelves();
         }
 
+        /// <summary>
+        /// Hides the delete menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void DontDeleteBtn_Clicked(object sender, EventArgs e)
         {
             ConfirmMenu.IsVisible = false;
             ConfirmMenuBackground.IsVisible = false;
         }
 
+        /// <summary>
+        /// When a bookshelf is clicked, opens that specific bookshelf.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public async void OpenBookshelfBtn_Clicked(object sender, EventArgs e)
         {
             // Ensure the sender is a Button
@@ -77,6 +109,10 @@ namespace MyVirtualBookshelf
             }
         }
 
+        /// <summary>
+        /// Updates the bookshelf display, useful when creating
+        /// and deleting bookshelves.
+        /// </summary>
         public void PopulateBookshelves()
         {
             Bookshelves.Clear();
