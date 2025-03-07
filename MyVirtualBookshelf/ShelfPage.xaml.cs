@@ -82,16 +82,27 @@ public partial class ShelfPage : ContentPage
     {
         if (!string.IsNullOrEmpty(BookSearchbar.Text))
         {
-            // Call the Google Books API service here
-            string searchQuery = BookSearchbar.Text;
-            List<Book> searchResults = await _bookService.SearchGoogleBooksAsync(searchQuery);
-
-            // Add the first result from the Google Books query to the db and perform
-            // necessary updates.
-            if (searchResults.Count > 0)
+            try
             {
-                Book bookToAdd = searchResults[0];
-                _db.AddBook(ShelfId, bookToAdd);
+                // throw new Exception(); // For debugging
+                string searchQuery = BookSearchbar.Text;
+                List<Book> searchResults = await _bookService.SearchGoogleBooksAsync(searchQuery);
+
+                // Add the first result from the Google Books query to the db and perform
+                // necessary updates.
+                if (searchResults.Count > 0)
+                {
+                    Book bookToAdd = searchResults[0];
+                    _db.AddBook(ShelfId, bookToAdd);
+                    BookSearchbar.Text = null;
+                    PopulateShelf();
+                    BookshelfPageToUpdate.PopulateBookshelf();
+                }
+            }
+            catch (Exception ex)
+            {   // Api call failed - Add SearchBar text as a book
+                Book titleOnlyBook = new Book(ShelfId, BookSearchbar.Text);
+                _db.AddBook(ShelfId, titleOnlyBook);
                 BookSearchbar.Text = null;
                 PopulateShelf();
                 BookshelfPageToUpdate.PopulateBookshelf();
