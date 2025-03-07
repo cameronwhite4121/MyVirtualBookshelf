@@ -24,8 +24,9 @@ features in mind that I'm unsure will make it to the final cut including:
 - Shelf is opened by clicking the shelf name
   
 ## Shelf Content View
-![image](https://github.com/user-attachments/assets/e47446b0-ce92-4bd7-b5b2-c63833f16d09)
-- Each book in the specific shelf is displayed here and its details will be displayed
+![image](https://github.com/user-attachments/assets/352629ce-4f09-4da9-b986-1b73dca0590c)
+- The searchbar adds books to the shelf, utilizing the google books api to   
+  pull book information from the web to be displayed on the shelf.
 
 ## Documentation / Helpful Links
 [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet)   
