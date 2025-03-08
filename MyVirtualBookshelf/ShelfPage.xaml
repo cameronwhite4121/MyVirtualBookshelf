@@ -96,7 +96,8 @@
                                                 TextColor="White" 
                                                 Padding="10" 
                                                 FontSize="{OnIdiom Phone=13, Tablet=17, Desktop=25}" 
-                                                Grid.Column="0"/>
+                                                Grid.Column="0"
+                                                Clicked="EditBookBtn_Clicked"/>
 
                                         <Label Text="{Binding Author}" 
                                                BackgroundColor="Transparent" 
@@ -136,20 +137,18 @@
                     </StackLayout>
                 </ScrollView>
                 <!--- END OF BOOK DISPLAY STYLING -->
-                
+
             </VerticalStackLayout>
         </ScrollView>
-        
-        <!-- DELETE BOOK STYLING -->
-        
-        <!-- Semi-transparent Background -->
-        <BoxView x:Name="ConfirmMenuBackground" 
+
+        <!-- OPAQUE BACKGROUND -->
+        <BoxView x:Name="OpaqueBackground" 
                  Color="Black"
                  IsVisible="False"
                  HorizontalOptions="FillAndExpand" 
                  VerticalOptions="FillAndExpand"/>
 
-        <!-- Pop-up menu -->
+        <!-- DELETE BOOK MENU -->
         <Border IsVisible="False" 
                 x:Name="ConfirmMenu" 
                 HorizontalOptions="Center" 
@@ -166,13 +165,13 @@
                          CornerRadius="20" 
                          HorizontalOptions="FillAndExpand" 
                          VerticalOptions="FillAndExpand"/>
-                
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <Label x:Name="ConfirmDeleteLabel" 
                            FontSize="{OnIdiom Phone=13, Tablet=17, Desktop=18}" 
                            TextColor="White" 
@@ -216,7 +215,43 @@
                 </Grid>
             </Grid>
         </Border>
+        <!-- END OF DELETE BOOK MENU -->
+
+        <!-- EDIT BOOK MENU -->
+        <Border IsVisible="False" 
+                x:Name="EditMenu" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Center"  
+                Stroke="White" 
+                StrokeThickness="2" 
+                Padding="0" 
+                StrokeShape="RoundRectangle 20">
+            <Grid>
+                <BoxView Color="#2b2924" 
+                         CornerRadius="20" 
+                         HorizontalOptions="FillAndExpand" 
+                         VerticalOptions="FillAndExpand"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Text="Cancel" 
+                            Grid.Column="0"
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            Clicked="CancelEditBtn_Clicked"/>
+                    <Button Text="Save" 
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            Clicked="SaveEditBtn_Clicked"/>
+                </Grid>
+            </Grid>
+            
+        </Border>
+        <!-- END OF EDIT BOOK MENU -->
 
     </Grid>
-
 </ContentPage>
