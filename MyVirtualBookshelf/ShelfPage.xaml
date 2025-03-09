@@ -224,26 +224,78 @@
                 VerticalOptions="Center"  
                 Stroke="White" 
                 StrokeThickness="2" 
-                Padding="0" 
-                StrokeShape="RoundRectangle 20">
+                StrokeShape="RoundRectangle 20"
+                HeightRequest="300"
+                WidthRequest="350">
             <Grid>
                 <BoxView Color="#2b2924" 
                          CornerRadius="20" 
                          HorizontalOptions="FillAndExpand" 
                          VerticalOptions="FillAndExpand"/>
-                <Grid>
+                <Grid Padding="25" RowSpacing="10" ColumnSpacing="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     
-                    <Button Text="Cancel" 
+                    <Label Text="Book Title: "
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           VerticalOptions="Center"/>
+                    
+                    <Entry x:Name="BookTitleEntry"
+                           Grid.Column="1"
+                           Grid.Row="0"
+                           WidthRequest="200"/>
+
+                    <Label Text="Book Author: "
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           VerticalOptions="Center"/>
+
+                    <Entry x:Name="BookAuthorEntry"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           WidthRequest="200"/>
+
+                    <Label Text="Book Genre: "
+                           Grid.Column="0"
+                           Grid.Row="2"
+                           VerticalOptions="Center"/>
+
+                    <Entry x:Name="BookGenreEntry"
+                           Grid.Column="1"
+                           Grid.Row="2"
+                           WidthRequest="200"/>
+
+                    <Label Text="Book Isbn: "
+                           Grid.Column="0"
+                           Grid.Row="3"
+                           VerticalOptions="Center"/>
+
+                    <Entry x:Name="BookIsbnEntry"
+                           Grid.Column="1"
+                           Grid.Row="3"
+                           WidthRequest="200"/>
+
+                    <Button Text="Cancel"
                             Grid.Column="0"
+                            Grid.Row="4"
                             BackgroundColor="Transparent"
                             TextColor="White"
                             Clicked="CancelEditBtn_Clicked"/>
-                    <Button Text="Save" 
+
+                    <Button Text="Save"
                             Grid.Column="1"
+                            Grid.Row="4"
                             BackgroundColor="Transparent"
                             TextColor="White"
                             Clicked="SaveEditBtn_Clicked"/>

@@ -175,15 +175,33 @@ public partial class ShelfPage : ContentPage
             BookToEdit.Author = book.Author;
             BookToEdit.Genre = book.Genre;
             BookToEdit.Isbn = book.Isbn;
+            BookToEdit.ShelfId = book.ShelfId;
 
             OpaqueBackground.IsVisible = true;
             OpaqueBackground.Opacity = 0.3;
             EditMenu.IsVisible = true;
+
+            BookTitleEntry.Text = BookToEdit.Title;
+            BookAuthorEntry.Text = BookToEdit.Author;
+            BookGenreEntry.Text = BookToEdit.Genre;
+            BookIsbnEntry.Text = BookToEdit.Isbn;
         }
     }
 
     public void SaveEditBtn_Clicked(object sender, EventArgs e)
     {
+        Book updatedBook = new Book();
+        updatedBook.Id = BookToEdit.Id;
+        updatedBook.Title = BookTitleEntry.Text;
+        updatedBook.Author = BookAuthorEntry.Text;
+        updatedBook.Genre = BookGenreEntry.Text;
+        updatedBook.Isbn = BookIsbnEntry.Text;
+        updatedBook.ShelfId = BookToEdit.ShelfId;
+
+        _db.UpdateBook(updatedBook);
+
+        PopulateShelf();
+
         EditMenu.IsVisible = false;
         OpaqueBackground.IsVisible = false;
     }
