@@ -189,6 +189,16 @@ namespace MyVirtualBookshelf.Models
         }
 
         /// <summary>
+        /// Updates a book in a shelf using an updated book object.
+        /// </summary>
+        /// <param name="shelfId"></param>
+        /// <param name="bookId"></param>
+        public void UpdateBook(Book updatedBook)
+        {
+            _db.Update(updatedBook);
+        }
+
+        /// <summary>
         /// Increments a shelf's BookCount property. Used to keep track 
         /// of the number of books in a shelf.
         /// </summary>

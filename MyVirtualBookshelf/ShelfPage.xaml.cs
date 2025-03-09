@@ -19,19 +19,19 @@ public partial class ShelfPage : ContentPage
     public ObservableCollection<Book> Books { get; set; }
 
     /// <summary>
-    /// Storage for when needing to delete a book.
+    /// Used when EditBookBtn_Clicked is called
     /// </summary>
-    public int BookId { get; set; }
+    public Book BookToEdit { get; set; } = new Book();
+
+    /// <summary>
+    /// Used when DeleteBookBtn_Clicked is called
+    /// </summary>
+    public Book BookToDelete { get; set; } = new Book();
 
     /// <summary>
     /// Needed for when adding and deleting books from this shelf.
     /// </summary>
     public int ShelfId { get; set; }
-
-    /// <summary>
-    /// Required for the delete menu
-    /// </summary>
-    public string BookTitle { get; set; }
 
     /// <summary>
     /// Reference to the bookshelf that this shelf resides in.
@@ -124,13 +124,13 @@ public partial class ShelfPage : ContentPage
 
             // Display BookTitle to the confirmation menu 
             Book book = clickedButton.BindingContext as Book;
-            BookId = book.Id;
-            BookTitle = book.Title;
+            BookToDelete.Id = book.Id;
+            BookToDelete.Title = book.Title;
 
-            ConfirmDeleteLabel.Text = $"Delete \"{BookTitle}\" ?";
+            ConfirmDeleteLabel.Text = $"Delete \"{BookToDelete.Title}\" ?";
 
-            ConfirmMenuBackground.IsVisible = true;
-            ConfirmMenuBackground.Opacity = 0.3;
+            OpaqueBackground.IsVisible = true;
+            OpaqueBackground.Opacity = 0.3;
             ConfirmMenu.IsVisible = true;
         }
     }
@@ -143,9 +143,9 @@ public partial class ShelfPage : ContentPage
     public void ConfirmDeleteBtn_Clicked(object sender, EventArgs e)
     {
         ConfirmMenu.IsVisible = false;
-        ConfirmMenuBackground.IsVisible = false;
+        OpaqueBackground.IsVisible = false;
 
-        _db.DeleteBook(ShelfId, BookId);
+        _db.DeleteBook(ShelfId, BookToDelete.Id);
         PopulateShelf();
         BookshelfPageToUpdate.PopulateBookshelf();
     }
@@ -158,6 +158,57 @@ public partial class ShelfPage : ContentPage
     public void DeclineDeleteBtn_Clicked(object sender, EventArgs e)
     {
         ConfirmMenu.IsVisible = false;
-        ConfirmMenuBackground.IsVisible = false;
+        OpaqueBackground.IsVisible = false;
+    }
+
+    public void EditBookBtn_Clicked(object sender, EventArgs e)
+    {
+        if (!ConfirmMenu.IsVisible || !EditMenu.IsVisible)
+        {
+            // Cast sender as a button to access BindingContext
+            Button clickedButton = sender as Button;
+
+            // Display BookTitle to the confirmation menu 
+            Book book = clickedButton.BindingContext as Book;
+            BookToEdit.Id = book.Id;
+            BookToEdit.Title = book.Title;
+            BookToEdit.Author = book.Author;
+            BookToEdit.Genre = book.Genre;
+            BookToEdit.Isbn = book.Isbn;
+            BookToEdit.ShelfId = book.ShelfId;
+
+            OpaqueBackground.IsVisible = true;
+            OpaqueBackground.Opacity = 0.3;
+            EditMenu.IsVisible = true;
+
+            BookTitleEntry.Text = BookToEdit.Title;
+            BookAuthorEntry.Text = BookToEdit.Author;
+            BookGenreEntry.Text = BookToEdit.Genre;
+            BookIsbnEntry.Text = BookToEdit.Isbn;
+        }
+    }
+
+    public void SaveEditBtn_Clicked(object sender, EventArgs e)
+    {
+        Book updatedBook = new Book();
+        updatedBook.Id = BookToEdit.Id;
+        updatedBook.Title = BookTitleEntry.Text;
+        updatedBook.Author = BookAuthorEntry.Text;
+        updatedBook.Genre = BookGenreEntry.Text;
+        updatedBook.Isbn = BookIsbnEntry.Text;
+        updatedBook.ShelfId = BookToEdit.ShelfId;
+
+        _db.UpdateBook(updatedBook);
+
+        PopulateShelf();
+
+        EditMenu.IsVisible = false;
+        OpaqueBackground.IsVisible = false;
+    }
+
+    public void CancelEditBtn_Clicked(object sender, EventArgs e)
+    {
+        EditMenu.IsVisible = false;
+        OpaqueBackground.IsVisible = false;
     }
 }
