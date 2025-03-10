@@ -7,14 +7,9 @@
         <!-- Main Content -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="30,0" Spacing="25">
-                <Image Source="beautiful_bookshelf_4464252.png" 
-                       HeightRequest="185" Aspect="AspectFit" 
+                <Image Source="bookcase_monster3.png" 
+                       HeightRequest="250" Aspect="AspectFit" 
                        SemanticProperties.Description="Cartoon Bookshelf" />
-
-                <Label Text="Welcome to &#10; Your Virtual Bookshelf!" 
-                       Style="{StaticResource SubHeadline}" 
-                       SemanticProperties.HeadingLevel="Level2" 
-                       SemanticProperties.Description="Welcome to your virtual bookshelf!" />
 
                 <FlexLayout Direction="Row" 
                             JustifyContent="Center" 
@@ -36,7 +31,7 @@
                             Clicked="CreateBookshelfBtn_Clicked"/>
                 </FlexLayout>
 
-                <BoxView Color="White" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+                <BoxView Color="White" HeightRequest="1" WidthRequest="700"/>
 
                 <!-- Bookshelves Display -->
                 <CollectionView ItemsSource="{Binding Bookshelves}" HorizontalOptions="Center" VerticalOptions="Center">
@@ -138,7 +133,7 @@
                 </FlexLayout>
             </Grid>
         </Border>
-        
+
     </Grid>
 
 </ContentPage>
