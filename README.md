@@ -11,20 +11,20 @@ features in mind that I'm unsure will make it to the final cut including:
 - and more to come as development progresses
   
 ## Main Page
-![image](https://github.com/user-attachments/assets/e7957ae2-15fe-4122-952d-ab84b2189aa3)
+![image](https://github.com/user-attachments/assets/24d3b4ac-6239-4d9f-9e0b-1f6080dd725d)
 - Add bookshelf button creates new bookshelves with a max limit of 8 at a time   
 - Bookshelves are displayed and can be clicked into
 - Delete bookshelf button deletes the bookshelf's contents, then the bookshelf itself   
   
 ## Shelf View
-![image](https://github.com/user-attachments/assets/ed852223-a3b0-40f8-8e15-862f92862505)
+![image](https://github.com/user-attachments/assets/e90b74a7-2e8a-4461-8005-ba69b559e7cf)
 - Each bookshelf gets 8 shelves on creation
 - The total number of books in each shelf is displayed
 - A preview of the shelve's contents is also displayed
 - Shelf is opened by clicking the shelf name
   
 ## Shelf Content View
-![image](https://github.com/user-attachments/assets/352629ce-4f09-4da9-b986-1b73dca0590c)
+![image](https://github.com/user-attachments/assets/c791b377-f5bd-4927-b054-972fc7fb3534)
 - The searchbar adds books to the shelf, utilizing the google books api to   
   pull book information from the web to be displayed on the shelf.
 
