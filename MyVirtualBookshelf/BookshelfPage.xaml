@@ -5,7 +5,7 @@
              Title="Shelves">
 
     <ScrollView>
-        <VerticalStackLayout Padding="10">
+        <StackLayout Padding="10" Spacing="30" Orientation="Vertical">
 
             <!-- Shelves Display -->
             <CollectionView ItemsSource="{Binding Shelves}" Margin="0">
@@ -58,7 +58,12 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-        </VerticalStackLayout>
+            <Image Source="bookcase_monster1.png" 
+                   HeightRequest="250" 
+                   Aspect="AspectFit" 
+                   SemanticProperties.Description="Cartoon Bookshelf" />
+
+        </StackLayout>
     </ScrollView>
-    
+
 </ContentPage>

@@ -19,7 +19,7 @@
     </Shell.FlyoutHeader>
 
     <ShellContent
-        Title="Home"
+        Title="Virtual Bookshelf"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
