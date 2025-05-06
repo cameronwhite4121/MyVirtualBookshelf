@@ -28,6 +28,24 @@ namespace MyVirtualBookshelf.Models
         public string BookshelfName { get; set; }
 
         /// <summary>
+        /// Total amount of books in the shelf
+        /// </summary>
+        [Column("BookCount")]
+        public int BookCount { get; set; }
+
+        /// <summary>
+        /// Total amount of books in the shelf
+        /// </summary>
+        [Column("BookCountString")]
+        public string BookCountString { get; set; }
+
+        /// <summary>
+        /// Meant to display a string that hints at the contents of the shelf.
+        /// </summary>
+        [Column("ShelfContentsHint")]
+        public string ShelfContentsHint { get; set; }
+
+        /// <summary>
         /// Parameterless constructor
         /// </summary>
         public Bookshelf() { }

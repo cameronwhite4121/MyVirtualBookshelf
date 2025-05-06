@@ -46,7 +46,7 @@
 		<MauiIcon Include="Resources\AppIcon\beautiful_bookshelf.png" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\bookcase_monster3.png" Color="#FF7043" BaseSize="100,100" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -60,6 +60,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\Splash\bookcase_monster3.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Google.Apis.Books.v1" Version="1.68.0.3331" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />
@@ -67,16 +71,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="ShelfPage.xaml.cs">
-	    <DependentUpon>ShelfPage.xaml</DependentUpon>
+	  <Compile Update="BookshelfPage.xaml.cs">
+	    <DependentUpon>BookshelfPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="BookshelfPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="ShelfPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

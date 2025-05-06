@@ -28,8 +28,8 @@ namespace MyVirtualBookshelf.Models
         /// DotNet maui doesn't support foreign keys so we'll have to be
         /// conscious of that in code.
         /// </summary>
-        [Column("ShelfId")]
-        public int ShelfId { get; set; }
+        [Column("BookshelfId")]
+        public int BookshelfId { get; set; }
 
         /// <summary>
         /// A unique 13-digit number that identifies books and other book-like products.
@@ -74,9 +74,9 @@ namespace MyVirtualBookshelf.Models
         /// Constructor for adding a book to a shelf.
         /// </summary>
         /// <param name="title">Title of the book</param>
-        public Book(int shelfId, string title)
+        public Book(int bookshelfId, string title)
         {
-            ShelfId = shelfId;
+            BookshelfId = bookshelfId;
             Title = title;
         }
 

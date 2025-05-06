@@ -18,9 +18,9 @@ namespace MyVirtualBookshelf.Models
             string dbPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/mydatabase.db3";
             _db = new SQLiteConnection(dbPath);
             _db.CreateTable<Bookshelf>();
-            _db.CreateTable<Shelf>();
             _db.CreateTable<Book>();
         }
+
         /// <summary>
         /// For debugging purposes. If this method is ever called, make sure to
         /// comment it out or delete it after its done being used.
@@ -45,19 +45,6 @@ namespace MyVirtualBookshelf.Models
             {
                 Bookshelf bookshelf = new();
                 _db.Insert(bookshelf);
-
-                List<Shelf> shelves = new List<Shelf>
-                {
-                     new(bookshelf.Id),
-                     new(bookshelf.Id),
-                     new(bookshelf.Id),
-                     new(bookshelf.Id),
-                     new(bookshelf.Id),
-                     new(bookshelf.Id),
-                     new(bookshelf.Id),
-                     new(bookshelf.Id)
-                };            
-                _db.InsertAll(shelves);
             }
         }
 
@@ -73,32 +60,18 @@ namespace MyVirtualBookshelf.Models
                                            where bks.Id == bookshelfId
                                            select bks).FirstOrDefault();
 
-            // Delete every shelf in the bookshelf
-            List<Shelf> shelvesToDelete = (from s in _db.Table<Shelf>()
-                                           where s.BookshelfId == bookshelfId
-                                           select s).ToList();
-
-            
-
-
             // If the bookshelf is found, delete it and its contents from top to bottom
             if (bookshelfToDelete != null)
-            {
-                foreach (Shelf shelf in shelvesToDelete)
+            { 
+                // Delete every book in the shelf
+                List<Book> booksToDelete = (from b in _db.Table<Book>()
+                                            where b.BookshelfId == bookshelfToDelete.Id
+                                            select b).ToList();
+
+                foreach (Book book in booksToDelete)
                 {
-                    // Delete every book in the shelf
-                    List<Book> booksToDelete = (from b in _db.Table<Book>()
-                                                where b.ShelfId == shelf.Id
-                                                select b).ToList();
-
-                    foreach (Book book in booksToDelete)
-                    {
-                        _db.Delete(book);
-                    }
-
-                    // Delete the shelf when its contents are deleted
-                    _db.Delete(shelf);
-                }
+                    _db.Delete(book);
+                }             
 
                 // Delete the bookshelf when its contents are deleted
                 _db.Delete(bookshelfToDelete);
@@ -106,31 +79,17 @@ namespace MyVirtualBookshelf.Models
         }
 
         /// <summary>
-        /// Grabs a bookshelves shelves by the bookshelfid
+        /// Grabs every book in a specific shelf by the bookshelfid
         /// </summary>
         /// <param name="bookshelfId"></param>
         /// <returns></returns>
-        public List<Shelf> GetBookshelfContents(int bookshelfId)
+        public List<Book> GetBookshelfContents(int bookshelfId)
         {
-            List<Shelf> shelves = (from s in _db.Table<Shelf>()
-                                   where s.BookshelfId == bookshelfId
-                                   select s).ToList();
+            List<Book> bookshelfContents = (from b in _db.Table<Book>()
+                                            where b.BookshelfId == bookshelfId
+                                            select b).ToList();
 
-            return shelves;
-        }
-
-        /// <summary>
-        /// Grabs every book in a specific shelf by the shelfid
-        /// </summary>
-        /// <param name="shelfId"></param>
-        /// <returns></returns>
-        public List<Book> GetShelfContents(int shelfId)
-        {
-            List<Book> shelfContents = (from b in _db.Table<Book>()
-                                        where b.ShelfId == shelfId
-                                        select b).ToList();
-
-            return shelfContents;
+            return bookshelfContents;
         }
 
         /// <summary>
@@ -143,89 +102,74 @@ namespace MyVirtualBookshelf.Models
         }
 
         /// <summary>
-        /// returns a specific shelf by its shelfid
+        /// Adds a book to a shelf with the bookshelfId and a book object
         /// </summary>
-        /// <param name="shelfId"></param>
-        /// <returns></returns>
-        public Shelf GetShelf(int shelfId)
-        {
-            Shelf shelf = (from s in _db.Table<Shelf>()
-                                   where s.Id == shelfId
-                                   select s).FirstOrDefault();
-
-            return shelf;
-        }
-
-        /// <summary>
-        /// Adds a book to a shelf with the shelfid and a book object
-        /// </summary>
-        /// <param name="shelfId"></param>
+        /// <param name="bookshelfId"></param>
         /// <param name="bookToAdd"></param>
-        public void AddBook(int shelfId, Book bookToAdd)
+        public void AddBook(int bookshelfId, Book bookToAdd)
         {
-            bookToAdd.ShelfId = shelfId;
+            bookToAdd.BookshelfId = bookshelfId;
             _db.Insert(bookToAdd);
-            IncrementBookCount(shelfId);
+            IncrementBookCount(bookshelfId);
         }
 
         /// <summary>
-        /// Deletes a book from a shelf with the shelfid and bookid
+        /// Deletes a book from a shelf with the bookshelfId and bookId
         /// </summary>
-        /// <param name="shelfId"></param>
+        /// <param name="bookshelfId"></param>
         /// <param name="bookId"></param>
-        public void DeleteBook(int shelfId, int bookId)
+        public void DeleteBook(int bookshelfId, int bookId)
         {
             // Use query syntax to find the book to delete by its Id and the Shelf Id
             Book bookToDelete = (from b in _db.Table<Book>()
-                                 where b.Id == bookId && b.ShelfId == shelfId                                      
+                                 where b.Id == bookId && b.BookshelfId == bookshelfId                                      
                                  select b).FirstOrDefault();
 
             // If the book is found, delete it from the shelf
             if (bookToDelete != null)
             {
                 _db.Delete(bookToDelete);
-                DecrementBookCount(shelfId);
+                DecrementBookCount(bookshelfId);
             }
         }
 
         /// <summary>
-        /// Updates a book in a shelf using an updated book object.
+        /// Updates a book in a shelf using a book object.
         /// </summary>
-        /// <param name="shelfId"></param>
-        /// <param name="bookId"></param>
-        public void UpdateBook(Book updatedBook)
+        /// <param name="bookToUpdate"></param>
+        public void UpdateBook(Book bookToUpdate)
         {
-            _db.Update(updatedBook);
+            _db.Update(bookToUpdate);
         }
 
         /// <summary>
         /// Increments a shelf's BookCount property. Used to keep track 
         /// of the number of books in a shelf.
         /// </summary>
-        /// <param name="shelfId"></param>
-        public void IncrementBookCount(int shelfId)
+        /// <param name="bookshelfId"></param>
+        public void IncrementBookCount(int bookshelfId)
         {
-            Shelf shelfToUpdate = (from s in _db.Table<Shelf>()
-                                   where s.Id == shelfId
+            Bookshelf bookshelfToUpdate = (from s in _db.Table<Bookshelf>()
+                                   where s.Id == bookshelfId
                                    select s).FirstOrDefault();
 
-            shelfToUpdate.BookCount++;
-            _db.Update(shelfToUpdate);
+            bookshelfToUpdate.BookCount++;
+            _db.Update(bookshelfToUpdate);
         }
 
         /// <summary>
         /// Decrements a shelf's BookCount property. Used to keep track 
         /// of the number of books in a shelf.
         /// </summary>
-        /// <param name="shelfId"></param>
-        public void DecrementBookCount(int shelfId)
+        /// <param name="bookshelfId"></param>
+        public void DecrementBookCount(int bookshelfId)
         {
-            Shelf shelfToUpdate = (from s in _db.Table<Shelf>()
-                                   where s.Id == shelfId
+            Bookshelf bookshelfToUpdate = (from s in _db.Table<Bookshelf>()
+                                   where s.Id == bookshelfId
                                    select s).FirstOrDefault();
 
-            shelfToUpdate.BookCount--;
-            _db.Update(shelfToUpdate);
+            bookshelfToUpdate.BookCount--;
+            _db.Update(bookshelfToUpdate);
         }
     }
 }

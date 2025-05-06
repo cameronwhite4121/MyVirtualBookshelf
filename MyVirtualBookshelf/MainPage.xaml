@@ -6,29 +6,26 @@
     <Grid>
         <!-- Main Content -->
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="30,0" Spacing="25">
-                <Image Source="bookcase_monster3.png" 
-                       HeightRequest="250" Aspect="AspectFit" 
-                       SemanticProperties.Description="Cartoon Bookshelf" />
-
+            <VerticalStackLayout Padding="30,30" Spacing="25">
                 <FlexLayout Direction="Row" 
                             JustifyContent="Center" 
                             AlignItems="Center" 
                             Wrap="Wrap">
-                    <Label Text="Bookshelves" 
-                           FontSize="30" />
-                    <Label x:Name="BookshelfCountLabel" 
-                           Text="0 / 8" 
-                           FontSize="30" 
-                           Margin="5, 0" />
+                    <Label Text="Add a Bookshelf" 
+                           FontSize="27" />
                     <Button x:Name="AddBookshelfBtn" 
                             Text="+" 
                             BackgroundColor="Transparent" 
                             TextColor="White" 
-                            BorderColor="White" 
+                            BorderColor="DarkOrange" 
+                            FontSize="{OnIdiom Phone=20, Tablet=17, Desktop=19}"
                             BorderWidth="2" 
                             Margin="5, 0" 
                             Clicked="CreateBookshelfBtn_Clicked"/>
+                    <Label x:Name="BookshelfCountLabel" 
+                           Text="0 / 8" 
+                           FontSize="27" 
+                           Margin="1, 0" />
                 </FlexLayout>
 
                 <BoxView Color="White" HeightRequest="1" WidthRequest="700"/>
@@ -39,31 +36,58 @@
                         <DataTemplate>
                             <Grid HorizontalOptions="Center" VerticalOptions="Center">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
                                 <Button Text="{Binding BookshelfName}" 
                                         BackgroundColor="Transparent" 
                                         TextColor="White" 
-                                        Padding="10" 
                                         FontSize="24" 
                                         Clicked="OpenBookshelfBtn_Clicked" 
-                                        Grid.Column="0" />
+                                        Grid.Column="0"
+                                        Grid.Row="0"/>
+
+                                <Label Text="{Binding BookCountString}"
+                                       TextColor="White" 
+                                       FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=20}" 
+                                       VerticalOptions="Center" 
+                                       Grid.Column="1"
+                                       Grid.Row="0"/>
+
+                                <Label Text="{Binding ShelfContentsHint}"
+                                       TextColor="White" 
+                                       FontSize="{OnIdiom Phone=15, Tablet=17, Desktop=20}" 
+                                       VerticalOptions="Center"
+                                       Grid.Row="1"
+                                       Grid.ColumnSpan="3"
+                                       MaximumWidthRequest="250"/>
 
                                 <Button Text="X" 
                                         BackgroundColor="Transparent" 
+                                        FontSize="{OnIdiom Phone=20, Tablet=17, Desktop=20}"
                                         TextColor="White" 
-                                        BorderColor="White" 
+                                        BorderColor="DarkOrange"
                                         BorderWidth="2" 
                                         HorizontalOptions="Center" 
                                         VerticalOptions="Center"
                                         Clicked="DeleteBookshelfBtn_Clicked" 
-                                        Grid.Column="1" />
+                                        Grid.Column="2"
+                                        Grid.Row="0"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
+                <Image Source="bookcase_monster1.png" 
+                       HeightRequest="400" 
+                       Aspect="AspectFit" 
+                       SemanticProperties.Description="Cartoon Bookshelf"/>
 
             </VerticalStackLayout>
         </ScrollView>

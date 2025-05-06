@@ -8,7 +8,7 @@
     Title="MyVirtualBookshelf">
 
     <Shell.FlyoutHeader>
-        <StackLayout Padding="10" BackgroundColor="#2D3B45">
+        <StackLayout Padding="10" BackgroundColor="Orange">
             <Label Text="My Virtual Bookshelf"
                FontSize="20"
                FontAttributes="Bold"
