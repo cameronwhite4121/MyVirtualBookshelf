@@ -105,7 +105,7 @@ namespace MyVirtualBookshelf
             if (clickedButton != null)
             {
                 Bookshelf selectedBookshelf = clickedButton.BindingContext as Bookshelf;
-                await Navigation.PushAsync(new BookshelfPage(selectedBookshelf.Id));
+                await Navigation.PushAsync(new BookshelfPage(selectedBookshelf.Id, this));
             }
         }
 
@@ -123,13 +123,58 @@ namespace MyVirtualBookshelf
             foreach (Bookshelf bookshelf in updatedBookshelves)
             {
                 bookshelf.BookshelfName = "Bookshelf " + i.ToString();
+
+                if (bookshelf.BookCount == 1)
+                {
+                    bookshelf.BookCountString = "|  1 Book  |   ";
+                }
+                else
+                {
+                    bookshelf.BookCountString = "|  " + bookshelf.BookCount + " Books  |   ";
+                }
+
                 Bookshelves.Add(bookshelf);
+                DisplayShelfHint(bookshelf);
                 i++;
             }
 
             // Update BookshelfCount.Text
             int numBookshelves = Bookshelves.Count;
-            BookshelfCountLabel.Text = $"{numBookshelves} / 8";
+            BookshelfCountLabel.Text = $"{numBookshelves} / 8";           
+        }
+
+        /// <summary>
+        /// This method grabs all the books in a shelf, if any, and
+        /// creates a string that is used to display a hint at what
+        /// is in the shelf.
+        /// </summary>
+        /// <param name="bookshelf"></param>
+        public void DisplayShelfHint(Bookshelf bookshelf)
+        {
+            List<Book> allBooks = _db.GetBookshelfContents(bookshelf.Id);
+
+            // Avoid null-reference exception by checking ahead
+            if (allBooks.Count == 0)
+            {
+               bookshelf.ShelfContentsHint = "This bookshelf is empty";
+            }
+            else
+            {
+                // Create a string using fencepost method           
+                for (int i = 0; i < allBooks.Count && i < 2; i++)
+                {
+                    // Add the title to ShelfContentsHint
+                    if (i == 0)
+                    {
+                        bookshelf.ShelfContentsHint += allBooks[i].Title;
+                    }
+                    else
+                    {
+                        bookshelf.ShelfContentsHint += ", " + allBooks[i].Title;
+                    }
+                }
+                bookshelf.ShelfContentsHint += " ...";
+            }
         }
     }
 }
